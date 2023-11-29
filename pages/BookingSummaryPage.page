@@ -1,0 +1,48 @@
+<apex:page controller="BookingSummaryController" renderAs="pdf">
+
+    <h1>Congratulations!!!! You have Successfully booked your seat for <apex:outputText value=" {!concertSummary.Concert_Name__c}"/>!</h1>
+    
+    <p>Your Booking Details:</p>
+
+    <table >
+        <tr>
+            <th>Booking ID</th>
+            <td><apex:outputText value="{!bookSummary.Name}"/></td>
+        </tr>
+        <tr>
+            <th>Concert Name</th>
+            <td><apex:outputText value="{!concertSummary.Concert_Name__c}"/></td>
+        </tr>
+        <tr>
+            <th>Customer Name</th>
+            <td><apex:outputText value="{!custSummary.First_Name__c} {!custSummary.Last_Name__c}"/></td>
+        </tr>
+        <tr>
+            <th>Venue Details</th>
+            <td><apex:outputText value="{!venueSummary.Venue_Name__c}, {!venueSummary.Venue_Address__c}, "/></td>
+        </tr>
+        <tr>
+            <th>Event Timing</th>
+            <td><apex:outputText value="{!eventSummary.Event_Timing__c}"/></td>
+        </tr>
+       
+        <tr>
+            <th>Number of Tickets Booked</th>
+            <td><apex:outputText value="{!bookSummary.Number_of_Tickets_Booked__c}"/></td>
+        </tr>
+        <tr>
+            <th>Confirmed Tickets</th>
+            <td><apex:outputText value="{!bookSummary.Confirmed_Tickets__c}"/></td>
+        </tr>
+        <tr>
+            <th>Waiting Tickets</th>
+            <td><apex:outputText value="{!bookSummary.Waiting_Tickets__c}"/></td>
+        </tr>
+        <tr>
+            <th>Total Price</th>
+            <td><apex:outputText value="{!bookSummary.Total_Price__c}"/></td>
+        </tr>
+    
+    </table>
+    
+</apex:page>

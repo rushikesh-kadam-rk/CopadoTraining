@@ -1,0 +1,7 @@
+<aura:tokens extends="c:TokenforCaseComp">
+    <aura:token name="divClassBackground" value="green"></aura:token>
+    <aura:token name="divFontWeight" value="bold"></aura:token>
+    <aura:token name="divMargin" value="10px"></aura:token>
+    <aura:token name="divTextColor" value="white"></aura:token>
+    <aura:token name="divFont" value="Arial"></aura:token>
+</aura:tokens>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Stripe Detail</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Stripe Details</value>
+    </caseValues>
+    <fields>
+        <label><!-- Stripe_Secret_Key --></label>
+        <name>Stripe_Secret_Key__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

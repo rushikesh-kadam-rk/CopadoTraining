@@ -1,0 +1,249 @@
+<apex:page controller="VFC02_VFP02_ReportExcel" contentType="application/vnd.ms-excel#ProfileCompare.xls" readOnly="true" sidebar="false">
+<font color="RED"><apex:pageMessages /></font>
+
+<!-- Custom App Settings -->
+<apex:outputPanel rendered="{!if(lstCA.size==0,false,true)}">
+<br/>
+<b>Custom App Settings</b>   
+<table border="1">
+    <tr bgcolor="#dddddd">
+        <th>Profiles</th>    
+        <apex:repeat value="{!lstCA}" var="caNames">
+            <th colspan="2" align="center">{!caNames}</th>
+        </apex:repeat>
+    </tr>
+    <tr bgcolor="#dddddd">
+        <td/>
+        <apex:repeat value="{!lstCA}" var="caNames">
+            <th>Visible</th>
+            <th>Default</th>
+        </apex:repeat>
+    </tr>
+        
+    <apex:repeat value="{!mapCA}" var="recs">
+        <tr>
+            <td>{!recs}</td>
+            <apex:repeat value="{!mapCA[recs]}" var="rVal">
+                <td>{!Left(mapCA[recs][rVal],FIND('-',mapCA[recs][rVal])-1)}</td>
+                <td>{!RIGHT(mapCA[recs][rVal],LEN(mapCA[recs][rVal]) - FIND('-',mapCA[recs][rVal]))}</td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat> 
+</table>
+</apex:outputPanel>
+
+<!-- Tab Settings -->
+<apex:outputPanel rendered="{!if(lstTS.size==0,false,true)}">
+<br/>
+<b>Tab Settings</b>   
+<table border="1">
+    <tr bgcolor="#dddddd">
+        <th>Profiles</th>    
+        <apex:repeat value="{!lstTS}" var="tsNames">
+             <th>{!RIGHT(tsNames,LEN(tsNames) - FIND('-',tsNames))}</th>
+        </apex:repeat>
+    </tr>
+    <apex:repeat value="{!mapTS}" var="recs">
+        <tr>
+            <td>{!recs}</td>
+            <apex:repeat value="{!mapTS[recs]}" var="rVal">
+                <td>{!mapTS[recs][rVal]}</td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat> 
+</table>
+</apex:outputPanel>
+
+<!-- Record Type Settings -->
+<apex:outputPanel rendered="{!if(lstRT.size==0,false,true)}">
+<br/>
+<b>Record Type Settings</b>   
+<table border="1">
+    <tr bgcolor="#dddddd">
+        <th>Profiles</th>    
+        <apex:repeat value="{!lstRT}" var="rtNames">
+            <th>{!rtNames}</th>
+        </apex:repeat>
+    </tr>
+    <apex:repeat value="{!mapRT}" var="recs">
+        <tr>
+            <td>{!recs}</td>
+            <apex:repeat value="{!mapRT[recs]}" var="rVal">
+                <td height="40">{!mapRT[recs][rVal]}</td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat> 
+</table>
+</apex:outputPanel>
+
+<!-- Administrative & General User Permissions -->
+<apex:outputPanel rendered="{!if(lstAG.size==0,false,true)}">
+<br/>
+<b>Administrative &amp; General User Permissions</b>   
+<table border="1">
+    <tr bgcolor="#dddddd">
+        <th>Profiles</th>    
+        <apex:repeat value="{!lstAG}" var="agNames">
+            <th>{!agNames}</th>
+        </apex:repeat>
+    </tr>
+    <apex:repeat value="{!mapAG}" var="recs">
+        <tr>
+            <td>{!recs}</td>
+            <apex:repeat value="{!mapAG[recs]}" var="rVal">
+                <td>{!mapAG[recs][rVal]}</td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat> 
+</table>
+</apex:outputPanel>
+
+<!-- Standard and Custom Object Permissions -->
+<apex:outputPanel rendered="{!if(lstOP.size==0,false,true)}">
+<br/>
+<b>Standard and Custom Object Permissions</b>   
+<table border="1">
+    <tr bgcolor="#dddddd">
+        <th>Profiles</th>    
+        <apex:repeat value="{!lstOP}" var="opNames">
+            <th colspan="6" align="center">{!opNames}</th>
+        </apex:repeat>
+    </tr>
+    <tr bgcolor="#dddddd">
+        <td/>
+        <apex:repeat value="{!lstOP}" var="opNames">
+            <th>Read</th>
+            <th>Create</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>View-All</th>
+            <th>Modfiy-All</th>
+        </apex:repeat>
+    </tr>
+        
+    <apex:repeat value="{!mapOP}" var="recs">
+        <tr>
+            <td>{!recs}</td>
+            <apex:repeat value="{!mapOP[recs]}" var="rVal">
+                <td>{!Left(mapOP[recs][rVal],FIND('-',mapOP[recs][rVal])-1)}</td>
+                <td>{!MID(mapOP[recs][rVal],FIND('-',mapOP[recs][rVal])+1,(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2))-(FIND('-',mapOP[recs][rVal]))-1)}</td>
+                <td>{!MID(mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2))+1,(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2)) + 2))-(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2))-1)}</td>
+                <td>{!MID(mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2)) + 2))+1,(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2)) + 2)) + 2))-(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2)) + 2))-1)}</td>
+                <td>{!MID(mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2)) + 2)) + 2))+1,(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2)) + 2)) + 2)) + 2))-(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2)) + 2)) + 2))-1)}</td>
+                <td>{!RIGHT(mapOP[recs][rVal],(LEN(mapOP[recs][rVal]) - FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],(FIND('-',mapOP[recs][rVal],FIND('-',mapOP[recs][rVal]) + 2)) + 2)) + 2)) + 2)))}</td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat> 
+</table>
+</apex:outputPanel>
+
+<!-- Desktop Integration Clients -->
+<apex:outputPanel rendered="{!if(lstDI.size==0,false,true)}">
+<br/>
+<b>Desktop Integration Clients</b>   
+<table border="1">
+    <tr bgcolor="#dddddd">
+        <th>Profiles</th>    
+        <apex:repeat value="{!lstDI}" var="diNames">
+            <th>{!diNames}</th>
+        </apex:repeat>
+    </tr>
+    <apex:repeat value="{!mapDI}" var="recs">
+        <tr>
+            <td>{!recs}</td>
+            <apex:repeat value="{!mapDI[recs]}" var="rVal">
+                <td>{!mapDI[recs][rVal]}</td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat> 
+</table>
+</apex:outputPanel>
+
+<!-- Login Hours -->
+<apex:outputPanel rendered="{!if(lstLH.size==0,false,true)}">
+<br/>
+<b>Login Hours</b>   
+<table border="1">
+    <tr bgcolor="#dddddd">
+        <th>Profiles</th>    
+        <apex:repeat value="{!lstLH}" var="lhNames">
+            <th>{!lhNames}</th>
+        </apex:repeat>
+    </tr>
+    <apex:repeat value="{!mapLH}" var="recs">
+        <tr>
+            <td>{!recs}</td>
+            <apex:repeat value="{!mapLH[recs]}" var="rVal">
+                <td>{!mapLH[recs][rVal]}</td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat> 
+</table>
+</apex:outputPanel>
+
+<!-- Login IP Ranges -->
+<apex:outputPanel rendered="{!if(lstIP.size==0,false,true)}">
+<br/>
+<b>Login IP Ranges</b>   
+<table border="1">
+    <tr bgcolor="#dddddd">
+        <th>Profiles</th>    
+        <apex:repeat value="{!lstIP}" var="ipNames">
+            <th>{!ipNames}</th>
+        </apex:repeat>
+    </tr>
+    <apex:repeat value="{!mapIP}" var="recs">
+        <tr>
+            <td>{!recs}</td>
+            <apex:repeat value="{!mapIP[recs]}" var="rVal">
+                <td>{!mapIP[recs][rVal]}</td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat> 
+</table>
+</apex:outputPanel>
+
+<!-- Apex Classes -->
+<apex:outputPanel rendered="{!if(lstApex.size==0,false,true)}">
+<br/>
+<b>Apex Classes</b>   
+<table border="1">
+    <tr bgcolor="#dddddd">
+        <th>Profiles</th>    
+        <apex:repeat value="{!lstApex}" var="ApexNames">
+            <th>{!ApexNames}</th>
+        </apex:repeat>
+    </tr>
+    <apex:repeat value="{!mapApex}" var="recs">
+        <tr>
+            <td>{!recs}</td>
+            <apex:repeat value="{!mapApex[recs]}" var="rVal">
+                <td>{!mapApex[recs][rVal]}</td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat> 
+</table>
+</apex:outputPanel>
+
+<!-- Visual Force Pages -->
+<apex:outputPanel rendered="{!if(lstVFPages.size==0,false,true)}">
+<br/>
+<b>Visual Force Pages</b>   
+<table border="1">
+    <tr bgcolor="#dddddd">
+        <th>Profiles</th>    
+        <apex:repeat value="{!lstVFPages}" var="VFNames">
+            <th>{!VFNames}</th>
+        </apex:repeat>
+    </tr>
+    <apex:repeat value="{!mapVFs}" var="recs">
+        <tr>
+            <td>{!recs}</td>
+            <apex:repeat value="{!mapVFs[recs]}" var="rVal">
+                <td>{!mapVFs[recs][rVal]}</td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat> 
+</table>
+</apex:outputPanel>
+</apex:page>

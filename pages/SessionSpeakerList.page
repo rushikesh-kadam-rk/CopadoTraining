@@ -1,0 +1,27 @@
+<apex:page standardController="Session_Speaker__c" recordSetVar="sss">
+  <apex:form >
+      <apex:pageBlock title="Session Speaker Details">
+      <apex:pageBlock >
+           <apex:pageBlockButtons >
+                 <apex:commandButton action="{!save}" value="Update"/>
+      
+            </apex:pageBlockButtons>
+              
+          <apex:pageBlockSection title="Session Speaker Records">
+              <apex:pageBlockTable value="{!sss}" var="ss">
+                  <apex:column headerValue="Session Number" value="{!ss.Name}"/>
+                  <apex:column headerValue="Speaker ID" value="{!ss.Speaker_Details__c}"/>
+                  <apex:column headerValue="Session Name" value="{!ss.Session__c}"/>
+          
+                  <apex:column headerValue="Edit Session Level" >
+                      <apex:inputField value="{!ss.Session__r.Level__c}"/>
+                  </apex:column>
+
+              </apex:pageBlockTable>
+              
+          </apex:pageBlockSection>
+          </apex:pageBlock>
+          
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

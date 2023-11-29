@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Einstein API Settings</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Einstein API Settings</value>
+    </caseValues>
+    <fields>
+        <label><!-- Intent Dataset CSV --></label>
+        <name>Intent_Dataset_CSV__c</name>
+    </fields>
+    <fields>
+        <label><!-- Intent Dataset Details Endpoint --></label>
+        <name>Intent_Dataset_Details_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Intent Dataset Folder Id --></label>
+        <name>Intent_Dataset_Folder_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Intent Dataset Training Status Endpoint --></label>
+        <name>Intent_Dataset_Training_Status_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Intent Model Id --></label>
+        <name>Intent_Model_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Intent Train Dataset Endpoint --></label>
+        <name>Intent_Train_Dataset_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Intent Upload Dataset Endpoint --></label>
+        <name>Intent_Upload_Dataset_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Predict Intent Endpoint --></label>
+        <name>Predict_Intent_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Predict Vision Endpoint --></label>
+        <name>Predict_Vision_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Registered Email --></label>
+        <name>Registered_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sentiment Endpoint --></label>
+        <name>Sentiment_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sentiment Model Id --></label>
+        <name>Sentiment_Model_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Token Endpoint --></label>
+        <name>Token_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Token Expiration Seconds --></label>
+        <name>Token_Expiration_Seconds__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Uploaded Intent Dataset CSV --></label>
+        <name>User_Uploaded_Intent_Dataset_CSV__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Uploaded Vision Dataset Image --></label>
+        <name>User_Uploaded_Vision_Dataset_Image__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vision Dataset Details Endpoint --></label>
+        <name>Vision_Dataset_Details_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vision Dataset Folder Id --></label>
+        <name>Vision_Dataset_Folder_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vision Dataset Training Status Endpoint --></label>
+        <name>Vision_Dataset_Training_Status_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vision Model Id --></label>
+        <name>Vision_Model_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vision Train Dataset Endpoint --></label>
+        <name>Vision_Train_Dataset_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vision Upload Dataset Endpoint --></label>
+        <name>Vision_Upload_Dataset_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vision User Predict Image --></label>
+        <name>Vision_User_Predict_Image__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

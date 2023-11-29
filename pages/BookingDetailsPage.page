@@ -1,0 +1,20 @@
+<apex:page standardController="Booking__c" extensions="NewBookingController">
+    <apex:form >
+        <apex:pageBlock title="Booking Details">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Confirm Booking" action="{!checkAvailability}"/>
+                
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1" title="Ticket Booking">
+                <apex:outputField value="{!booking.Event_Name__c}" />
+                <apex:outputText label="Concert Type" value="{!c.Concert_Type__c}"/>
+                <apex:outputField value="{!booking.Customer_Name__c}"/>
+                
+                <apex:outputField label="Number of Tickets Booked" value="{!booking.Number_of_Tickets_Booked__c}"/>
+                <apex:outputText label="Available Tickets" value="{!e.Avail_Tickets__c}"/>
+                <apex:outputText label="Total Price" value="{!booking.Number_of_Tickets_Booked__c*e.Ticket_Price__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

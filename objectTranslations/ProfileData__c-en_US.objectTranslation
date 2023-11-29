@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ProfileData</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ProfilesData</value>
+    </caseValues>
+    <fields>
+        <label><!-- DTime --></label>
+        <name>DTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data1 --></label>
+        <name>Data1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data2 --></label>
+        <name>Data2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data3 --></label>
+        <name>Data3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data4 --></label>
+        <name>Data4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data5 --></label>
+        <name>Data5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data6 --></label>
+        <name>Data6__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data7 --></label>
+        <name>Data7__c</name>
+    </fields>
+    <fields>
+        <label><!-- DataType --></label>
+        <name>DataType__c</name>
+        <picklistValues>
+            <masterLabel>Administrative &amp; General User Permissions</masterLabel>
+            <translation><!-- Administrative &amp; General User Permissions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Apex Class Access</masterLabel>
+            <translation><!-- Apex Class Access --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Custom App Settings</masterLabel>
+            <translation><!-- Custom App Settings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Desktop Integration Clients</masterLabel>
+            <translation><!-- Desktop Integration Clients --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Login Hours</masterLabel>
+            <translation><!-- Login Hours --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Login IP Ranges</masterLabel>
+            <translation><!-- Login IP Ranges --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Object Permissions</masterLabel>
+            <translation><!-- Object Permissions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Record Type Settings</masterLabel>
+            <translation><!-- Record Type Settings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tab Settings</masterLabel>
+            <translation><!-- Tab Settings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Visualforce Page Access</masterLabel>
+            <translation><!-- Visualforce Page Access --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- OrgWiseProfileName --></label>
+        <name>OrgWiseProfileName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Organization_Details --></label>
+        <name>Organization_Details__c</name>
+        <relationshipLabel><!-- ProfilesData --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

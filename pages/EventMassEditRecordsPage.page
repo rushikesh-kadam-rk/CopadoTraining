@@ -1,0 +1,30 @@
+<apex:page standardController="Event__c" recordSetVar="events">
+  <apex:form >
+      <apex:pageBlock title="Event Details">
+      <apex:pageBlock >
+           <apex:pageBlockButtons >
+                 <apex:commandButton action="{!Save}" value="Save"/>
+                 <apex:commandButton action="{!next}" value="Next"/>
+          
+            
+                 <apex:commandButton action="{!Previous}" value="previous"/>
+      
+            </apex:pageBlockButtons>
+              
+          <apex:pageBlockSection >
+              <apex:pageBlockTable value="{!events}" var="event">
+                  <apex:column value="{!event.Name}"/>
+                  <apex:column value="{!event.Avail_Tickets__c}"/>
+          
+                  <apex:column headerValue="Status" >
+                      <apex:inputField value="{!event.Avail_Tickets__c}"/>
+                  </apex:column>
+
+              </apex:pageBlockTable>
+              
+          </apex:pageBlockSection>
+          </apex:pageBlock>
+          
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

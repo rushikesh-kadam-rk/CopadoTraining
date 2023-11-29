@@ -1,0 +1,28 @@
+<apex:page standardController="Booking__c" recordSetVar="bookings">
+  <apex:form >
+      <apex:pageBlock title="Booking Details">
+      <apex:pageBlock >
+           <apex:pageBlockButtons >
+                 <apex:commandButton action="{!Save}" value="Save"/>
+                 <apex:commandButton action="{!next}" value="Next"/>
+          
+            
+                 <apex:commandButton action="{!Previous}" value="previous"/>
+      
+            </apex:pageBlockButtons>
+              
+          <apex:pageBlockSection >
+              <apex:pageBlockTable value="{!bookings}" var="booking">
+                  <apex:column value="{!booking.Name}"/>
+          
+                  <apex:column headerValue="Status" >
+                  </apex:column>
+
+              </apex:pageBlockTable>
+              
+          </apex:pageBlockSection>
+          </apex:pageBlock>
+          
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,49 @@
+<template>
+		<template if:true={isLoading}>
+            <lightning-spinner
+                alternative-text="Loading"
+                variant="brand"
+                size="medium"
+                class="spins"
+            >
+            </lightning-spinner>
+        </template>
+  <lightning-card title="Currency Converter" 
+      icon-name="custom:custom16">
+      <div class="slds-p-around_medium">
+          <div class="row">
+              <lightning-input type="number" name="amount" 
+															 required
+                  label="Enter Amount in CAD" value={amount}
+                  onchange={handleAmountChange}></lightning-input>
+          </div>
+
+          <lightning-combobox
+              name="targetCurrency"
+              label="Select Target Currency"
+              value={targetCurrency}
+              placeholder="Select Target Currency"
+              options={options}
+              onchange={handleTargetChange}></lightning-combobox>
+
+          <div class="slds-m-top_small slds-m-bottom_medium">
+              <h2 class="slds-text-heading_small slds-m-bottom_small">
+                  <lightning-button variant="brand" 
+                      label="Convert" title="Convert"
+																		icon-name="utility:download"
+																		disabled={isValidAmount}
+                      onclick={handleConvert}></lightning-button>
+              </h2>
+          </div>
+     
+					<template if:true={convertedAmountHistory}>
+						History::
+							<template for:each={convertedAmountHistory} for:item="a1">
+								<div class="row" key={a1.label}>
+								<p><lightning-formatted-text value={a1.label} ></lightning-formatted-text></p>
+							</div>
+							</template>
+					</template>
+      </div>
+  </lightning-card>
+</template>

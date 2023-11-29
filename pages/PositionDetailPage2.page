@@ -1,0 +1,4 @@
+<apex:page >
+  <apex:detail relatedList="false" />
+  <apex:relatedList list="Job_Applications"/>
+</apex:page>

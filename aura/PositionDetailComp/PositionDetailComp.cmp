@@ -1,0 +1,10 @@
+<aura:component controller="PositionCompController" implements="flexipage:availableForAllPageTypes">
+    <aura:attribute name="plist" type="List" />
+    <br></br>
+	<lightning:button label="GET Positions" onclick="{!c.getPositions}"/>
+    <br></br>
+    <br></br>
+    <aura:iteration items="{!v.plist}" var="position">
+        {!position.Name}<br></br>
+    </aura:iteration>
+</aura:component>

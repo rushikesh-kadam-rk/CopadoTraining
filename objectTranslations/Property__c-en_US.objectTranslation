@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Property</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Properties</value>
+    </caseValues>
+    <fields>
+        <label><!-- Additional Room --></label>
+        <name>Additional_Room__c</name>
+        <picklistValues>
+            <masterLabel>Maid Room</masterLabel>
+            <translation><!-- Maid Room --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Puja Room</masterLabel>
+            <translation><!-- Puja Room --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Store Room</masterLabel>
+            <translation><!-- Store Room --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Area --></label>
+        <name>Area__c</name>
+        <picklistValues>
+            <masterLabel>Bangalore</masterLabel>
+            <translation><!-- Bangalore --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bhubaneshwar</masterLabel>
+            <translation><!-- Bhubaneshwar --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chennai</masterLabel>
+            <translation><!-- Chennai --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hyderabad</masterLabel>
+            <translation><!-- Hyderabad --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mumbai</masterLabel>
+            <translation><!-- Mumbai --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pune</masterLabel>
+            <translation><!-- Pune --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Available From --></label>
+        <name>Available_From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Carpet Area(sqft) --></label>
+        <name>Carpet_Area_sqft__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Country__c</name>
+        <picklistValues>
+            <masterLabel>Canada</masterLabel>
+            <translation><!-- Canada --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>France</masterLabel>
+            <translation><!-- France --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Germany</masterLabel>
+            <translation><!-- Germany --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>India</masterLabel>
+            <translation><!-- India --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>USA</masterLabel>
+            <translation><!-- USA --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Covered Area(sqft) --></label>
+        <name>Covered_Area_sqft__c</name>
+    </fields>
+    <fields>
+        <label><!-- Electricity Status --></label>
+        <name>Electricity_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Facing --></label>
+        <name>Facing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Floor --></label>
+        <name>Floor__c</name>
+    </fields>
+    <fields>
+        <label><!-- For Bachelor --></label>
+        <name>For_Bachelor__c</name>
+    </fields>
+    <fields>
+        <label><!-- For Family --></label>
+        <name>For_Family__c</name>
+    </fields>
+    <fields>
+        <label><!-- Furnished Type --></label>
+        <name>Furnished_Type__c</name>
+        <picklistValues>
+            <masterLabel>Fully Furnished</masterLabel>
+            <translation><!-- Fully Furnished --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Semi Furnished</masterLabel>
+            <translation><!-- Semi Furnished --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unfurnished</masterLabel>
+            <translation><!-- Unfurnished --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Furnishing Available --></label>
+        <name>Furnishing_Available__c</name>
+    </fields>
+    <fields>
+        <label><!-- Geo Map --></label>
+        <name>Geo_Map__c</name>
+    </fields>
+    <fields>
+        <label><!-- Landmark --></label>
+        <name>Landmark__c</name>
+    </fields>
+    <fields>
+        <label><!-- Location --></label>
+        <name>Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Maintenance Charge --></label>
+        <name>Maintenance_Charge__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Balcony --></label>
+        <name>Number_of_Balcony__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Bathrooms --></label>
+        <name>Number_of_Bathrooms__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Bedrooms --></label>
+        <name>Number_of_Bedrooms__c</name>
+    </fields>
+    <fields>
+        <label><!-- Property Description --></label>
+        <name>Property_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Property Main Image --></label>
+        <name>Property_Main_Image__c</name>
+    </fields>
+    <fields>
+        <label><!-- Property Owner --></label>
+        <name>Property_Owner__c</name>
+        <relationshipLabel><!-- Properties --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Property Video URL --></label>
+        <name>Property_Video_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rent --></label>
+        <name>Rent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Security Deposit --></label>
+        <name>Security_Deposit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Available</masterLabel>
+            <translation><!-- Available --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Leased</masterLabel>
+            <translation><!-- Leased --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rented</masterLabel>
+            <translation><!-- Rented --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Street --></label>
+        <name>Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- Verified --></label>
+        <name>Verified__c</name>
+    </fields>
+    <fields>
+        <label><!-- Water Availability --></label>
+        <name>Water_Availability__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

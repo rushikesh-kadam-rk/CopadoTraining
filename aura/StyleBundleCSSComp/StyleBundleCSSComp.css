@@ -1,0 +1,14 @@
+.THIS {
+    background-color:grey;
+}
+.THIS .red{
+	background-color:red;
+}
+.THIS .yellow{
+	background-color:yellow;
+    font-style:italic;
+}
+.THIS .blue{
+    font-weight:bold;
+	background-color:white;
+}

@@ -1,0 +1,16 @@
+<apex:page lightningStylesheets="true">
+    <apex:slds />
+    <div id="div1">
+        Div1
+    </div>
+    <div id="div2">
+        Div2
+    </div>
+    <apex:form >
+        <apex:pageBlock title="My Content" mode="edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Hide Div"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

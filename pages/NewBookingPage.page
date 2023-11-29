@@ -1,0 +1,18 @@
+<apex:page standardController="Booking__c" extensions="NewBookingController">
+    <apex:form >
+        <apex:pageBlock title="New Booking">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Proceed" action="{!getBookingDetails}"/>   
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection columns="1" title="Ticket Booking">
+                <apex:inputField value="{!booking.Event_Name__c}" />
+                <apex:inputField value="{!booking.Customer_Name__c}"/>
+                <apex:inputField label="Number of Tickets" value="{!booking.Number_of_Tickets_Booked__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageMessages ></apex:pageMessages>
+                        
+        </apex:pageBlock>    
+    </apex:form>
+    
+</apex:page>

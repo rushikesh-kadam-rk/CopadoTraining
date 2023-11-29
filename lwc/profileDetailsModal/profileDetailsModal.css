@@ -1,0 +1,52 @@
+.header-action{
+	float: right;
+    padding: 0.5rem;
+}
+
+.back{
+	background-color: #ffffff;
+	padding-left: 7%;
+	padding-bottom: 3%;
+}
+
+.my-icon{
+	height: 10rem;
+	width: 10rem;
+	border-radius: 50%;
+	background-color: green;
+	border: .25rem solid #ffffff;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.navi {
+  background-color: #901b1b;
+  height: 7.5rem;
+}
+.navi2 {
+  background-color: #ffffff;
+  height: 7.5rem;
+}
+
+.infoi {
+  	position: absolute;
+  	top: 20%;
+	left: 5%;
+
+  height: 20px;
+  padding: 10px 10px;
+}
+
+.slds-card__header{
+	background: #901b1b;
+}
+
+.profile-image{
+	width: 20%;
+}
+
+.header{
+	background: #901b1b;
+}

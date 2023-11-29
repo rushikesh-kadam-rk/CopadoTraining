@@ -1,0 +1,18 @@
+<aura:component >
+    <aura:attribute name="num1" type="Integer" required="false" default="0" />
+    <aura:attribute name="num2" type="Integer" required="false" default="0" />
+    <aura:attribute name="result" type="Integer" required="false" default="0" />
+    <aura:attribute name="subresult" type="Integer" required="false" default="0" />
+    
+    <lightning:button label="ADD" onclick="{!c.add}"/>
+    <lightning:button label="SUBTRACT" onclick="{!c.sub}"/>
+    
+    Addition : {!v.result}
+    Subtraction : {!v.subresult}
+    
+    <!--<div class="mystyle">
+    	Addition = {!v.num1+v.num2}
+    	Subtraction = {!v.num1-v.num2}
+    </div>-->
+    
+</aura:component>

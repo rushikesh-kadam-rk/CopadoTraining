@@ -1,0 +1,200 @@
+<template>
+    
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_4-of-6">
+            
+        </div>
+        <div class="slds-col slds-size_2-of-6 slds-var-p-around_small">
+            <lightning-button variant="brand" label="Save" title="Primary action" onclick={handleSave} class="slds-var-m-around_xx-small slds-float_right" disabled={isEditing}></lightning-button>
+            <lightning-button variant="brand-outline" label="Calculate" title="Primary action with lighter look" onclick={handleCalculate} class="slds-var-m-around_xx-small slds-float_right"></lightning-button>
+        </div>
+        <div class="slds-col slds-size_6-of-6">
+            <lightning-card title="Product Quotes" icon-name="standard:account">
+                <!--<div class="slds-p-around_xxx-small">-->
+                    <lightning-datatable
+                        key-field="Id"
+                        data={pqList}
+                        columns={columns}
+                        oncellchange={enableCalcuate}
+                        hide-checkbox-column="true"
+                        suppress-bottom-bar>
+                    </lightning-datatable> 
+                <!-- </div> -->
+            </lightning-card>
+        </div>
+        <div class="slds-col slds-size_6-of-6">
+            <lightning-card title="Service Quotes" icon-name="standard:contact">
+                <!-- <div class="slds-p-around_xxx-small"> -->
+                    <lightning-datatable
+                        key-field="Id"
+                        data={sqList}
+                        columns={sqcolumns}
+                        oncellchange={enableCalcuate}
+                        hide-checkbox-column="true"
+                        suppress-bottom-bar>
+                    </lightning-datatable> 
+                <!-- </div> -->
+            </lightning-card>
+        </div>
+        <div class="slsd-col slds-size_3-of-6">
+            
+        </div>
+        <div class="slsd-col slds-size_3-of-6 opp-table">
+            <div class="slds-var-p-around_x-small">
+                <lightning-card title="Opportunity Value" icon-name="standard:opportunity">
+                    <table border="1">
+                        <tbody>
+                            <tr class="slds-hint-parent">
+                                <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                                    <span class="slds-grid slds-grid_align-spread">
+                                    <span class="slds-truncate" title="Opportunity Amount">Opportunity Amount</span>
+                                    </span>
+                                </td>
+                                <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                                    <div class="slds-truncate" title="">{oppAmount}</div>
+                                </td>
+                            </tr>
+                            <tr class="slds-hint-parent">
+                                <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                                    <span class="slds-grid slds-grid_align-spread">
+                                    <span class="slds-truncate" title="Opportunity Total GP">Opportunity Total GP</span>
+                                    </span>
+                                </td>
+                                <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                                    <div class="slds-truncate" title="">{oppGP}</div>
+                                </td>
+                            </tr>
+                            <tr class="slds-hint-parent">
+                                <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                                    <span class="slds-grid slds-grid_align-spread">
+                                    <span class="slds-truncate" title="Opportunity Total GP%">Opportunity Total GP%</span>
+                                    </span>
+                                </td>
+                                <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                                    <div class="slds-truncate" title="">{oppGPP}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+                
+                </lightning-card>
+            </div>
+            
+        </div>
+        <!--<div class="slds-col slds-size_4-of-6 slds-float_right">
+        <div class="slds-var-m-around_medium">
+        <lightning-card title="Opportunity Value" icon-name="standard:opportunity">
+            
+            <table border="1" class="">
+            <tbody>
+                <tr class="slds-hint-parent">
+                    <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                        <span class="slds-grid slds-grid_align-spread">
+                          <span class="slds-truncate" title="Opportunity Amount">Opportunity Amount</span>
+                        </span>
+                    </td>
+                    <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                        <div class="slds-truncate" title="">{oppAmount}</div>
+                    </td>
+                </tr>
+                <tr class="slds-hint-parent">
+                    <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                        <span class="slds-grid slds-grid_align-spread">
+                          <span class="slds-truncate" title="Opportunity Total GP">Opportunity Total GP</span>
+                        </span>
+                    </td>
+                    <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                        <div class="slds-truncate" title="">{oppGP}</div>
+                    </td>
+                </tr>
+                <tr class="slds-hint-parent">
+                    <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                        <span class="slds-grid slds-grid_align-spread">
+                          <span class="slds-truncate" title="Opportunity Total GP%">Opportunity Total GP%</span>
+                        </span>
+                    </td>
+                    <td class="slds-cell slds-var-p-around_small" role="gridcell">
+                        <div class="slds-truncate" title="">{oppGPP}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </lightning-card>
+    </div>
+    </div>-->
+    </div>    
+    
+
+    <!--<div class="slds-m-around_small">
+        
+        <div class="slds-var-m-around_large">
+            <div class="slds-m-around_medium">
+                <lightning-button variant="brand" label="Save" title="Primary action" onclick={handleSave} class="slds-var-m-around_small slds-float_right"></lightning-button>
+                <lightning-button variant="brand-outline" label="Calculate" title="Primary action with lighter look" onclick={handleCalculate} class="slds-m-around_small slds-float_right" disabled="true"></lightning-button>
+            </div>
+            <div class="slds-table_edit_container slds-is-relative">
+                <div class="slds-box slds-theme-default slds-text-heading_medium slds-align_absolute-center">
+                    Product Quotes
+                </div>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" aria-label="Example table of Opportunities with vertical borders">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Serial">Serial</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Product Cost">Product Cost</div>
+                              </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Selling Price">Selling Price</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="GP%">GP%</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Product GP">Product GP</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={pqList} for:item="pq">
+                            <tr key={pq.serial}>
+                                <td class="slds-cell-edit" role="gridcell">
+                                    <span class="slds-grid slds-grid_align-spread">
+                                      <span class="slds-truncate" title={pq.serial>{pq.serial}</span>
+                                    </span>
+                                </td>
+                                <td class="slds-cell-edit" role="gridcell">
+                                    <span class="slds-grid slds-grid_align-spread">
+                                      <span class="slds-truncate" title={pq.Product_Cost__c>{pq.Product_Cost__c}</span>
+                                    </span>
+                                </td>
+                                <td class="slds-cell-edit" role="gridcell">
+                                    <span class="slds-grid slds-grid_align-spread">
+                                      <span class="slds-truncate" title={pq.Selling_Price__c>{pq.Selling_Price__c}</span>
+                                    </span>
+                                </td>
+                                <td class="slds-cell-edit" role="gridcell">
+                                    <span class="slds-grid slds-grid_align-spread">
+                                      <span class="slds-truncate" title={pq.Gp__c>{pq.Gp__c}</span>
+                                      <button class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="-1" title="Edit Close Date of Acme - 1,200 Widgets">
+                                        <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_edit" aria-hidden="true">
+                                        </svg>
+                                        <span class="slds-assistive-text">Edit Close Date of Acme - 1,200 Widgets</span>
+                                      </button>
+                                    </span>
+                                </td> 
+                                <td class="slds-cell-edit" role="gridcell">
+                                    <span class="slds-grid slds-grid_align-spread">
+                                      <span class="slds-truncate" title={pq.Product_GP__c>{pq.Product_GP__c}</span>
+                                    </span>
+                                </td>                              
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>--> 
+</template>

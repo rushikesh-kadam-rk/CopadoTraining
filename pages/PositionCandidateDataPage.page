@@ -1,0 +1,21 @@
+<apex:page controller="PCJController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Previous" action="{!candidatepage}"/>
+                <apex:commandButton value="Save" action="{!save}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Position Details">
+                <apex:outputField value="{!position.Name}"/>
+                <apex:outputField value="{!position.Job_Description__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Candidate Details">
+                <apex:outputField value="{!candidate.First_Name__c}"/>
+                <apex:outputField value="{!candidate.Last_Name__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection >
+               
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

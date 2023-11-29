@@ -1,0 +1,164 @@
+<template>
+  <template lwc:if={isInitiazed}>
+    <lightning-modal-header
+      label={rebateSubmissionHeader}
+    ></lightning-modal-header>
+    <lightning-modal-body class="modal-body">
+      <template lwc:if={rebateItemsAvailable}>
+        <!--SHOW LIST OF CAMPAIGNS START-->
+        <template lwc:if={showRelatedCampaigns}>
+          <div class="slds-text-heading_small slds-text-align_center">
+            {labels.SELECT_REBATE}
+          </div>
+          <c-campaign-item-card
+            card-data={relatedCampaigns}
+            existing-campaign-id={existingCampaignId}
+            onselectedcampaign={handleSelectedCampaign}
+          >
+          </c-campaign-item-card>
+        </template>
+        <!--SHOW LIST OF CAMPAIGNS END-->
+        <!--SHOW LIST OF REBATE ITEMS START-->
+        <template lwc:elseif={showRebateItemsSelection}>
+          <c-rebate-item-selection
+            related-rebate-items={relatedRebateItems}
+            onselectedriquantity={handleSelRIQuantityValidation}
+            onselectedrebateitems={handleSelectedRebateItems}
+            existing-selected-rebate-items={confirmedRebateItems}
+          ></c-rebate-item-selection>
+        </template>
+        <!--SHOW LIST OF REBATE ITEMS END-->
+        <!--NO REBATES ITEMS MESSAGE START-->
+        <template lwc:elseif={noRebateItemMessage}>
+          <div class="slds-text-align_center slds-text-heading_medium">
+            {labels.NO_RELATED_RI_MESSAGE}
+          </div>
+        </template>
+        <!--NO REBATES ITEMS MESSAGE END-->
+        <!--SHOW LIST OF CONFIRMED REBATE ITEMS START-->
+        <template lwc:elseif={showRebateConfirmation}>
+          <c-rebate-confirmation-submission
+            confirmed-rebate-items={confirmedRebateItems}
+            total-estimated-rebate-credit={totalEstimatedRebateCredit}
+          >
+          </c-rebate-confirmation-submission>
+        </template>
+        <!--SHOW LIST OF CONFIRMED REBATE ITEMS END-->
+        <template lwc:if={isRebateItemsSubmitted}>
+          <!--SUBMISSION COMPLETED MESSAGE START-->
+          <template lwc:if={isSubmissionCompleted}>
+            <div
+              class="slds-text-align_center slds-text-heading_medium submission-screen-height slds-align_absolute-center"
+            >
+              {labels.SUBMISSION_COMPLETED}
+            </div>
+          </template>
+          <!--SUBMISSION COMPLETED MESSAGE END-->
+          <!--SUBMISSION FAILED MESSAGE START-->
+          <template lwc:elseif={isSubmissionFailed}>
+            <div
+              class="slds-text-align_center slds-text-heading_medium submission-screen-height slds-align_absolute-center"
+            >
+              <div class="slds-text-color_error">
+                {labels.SUBMISSION_FAILED}: {submissionError}
+              </div>
+            </div>
+          </template>
+          <!--SUBMISSION FAILED MESSAGE END-->
+          <!--SUBMISSION IN PROGRESS MESSAGE START-->
+          <template lwc:else>
+            <div
+              class="slds-grid slds-grid_vertical-align-center submission-screen-height"
+            >
+              <div class="slds-col slds-size_2-of-3">
+                <div
+                  class="slds-text-align_right slds-text-heading_medium slds-p-right_small"
+                >
+                  {labels.SUBMISSION_INPROGRESS}
+                </div>
+              </div>
+              <div class="slds-col slds-size_1-of-3">
+                <div
+                  class="slds-icon-eq slds-is-animated slds-p-left_small"
+                  title="Description of the icon when needed"
+                >
+                  <div class="slds-icon-eq__bar bar-height"></div>
+                  <div class="slds-icon-eq__bar bar-height"></div>
+                  <div class="slds-icon-eq__bar bar-height"></div>
+                  <span class="slds-assistive-text"
+                    >{labels.SUBMISSION_INPROGRESS}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </template>
+          <!--SUBMISSION IN PROGRESS MESSAGE END-->
+        </template>
+      </template>
+      <!--NO REBATES MESSAGE START-->
+      <template lwc:else>
+        <div class="slds-text-align_center slds-text-heading_small">
+          {labels.NO_REBATE_ITEMS_MESSAGE}
+        </div>
+      </template>
+      <!--NO REBATES MESSAGE END-->
+    </lightning-modal-body>
+    <!--FOOTER BUTTONS START-->
+    <lightning-modal-footer>
+      <!--BACK BUTTON-->
+      <template lwc:if={backButtonVisibility}>
+        <lightning-button
+          label={labels.BACK_BUTTON}
+          onclick={handleBackScreen}
+          class="slds-p-right_small"
+        ></lightning-button>
+      </template>
+      <template lwc:if={rebateItemsAvailable}>
+        <!--SUBMIT BUTTON-->
+        <template lwc:if={showRebateConfirmation}>
+          <lightning-button
+            label={labels.SUBMIT_BUTTON}
+            onclick={handleSubmitRebateItems}
+            class="slds-p-right_small"
+            variant="brand"
+          ></lightning-button>
+        </template>
+        <!--NEXT BUTTON-->
+        <template lwc:elseif={nextButtonVisibility}>
+          <lightning-button
+            label={labels.NEXT_BUTTON}
+            onclick={handleNextScreen}
+            class="slds-p-right_small"
+            disabled={isNextButtonDisabled}
+          ></lightning-button>
+        </template>
+      </template>
+      <!--CLOSE BUTTON-->
+      <template lwc:if={isRebateItemsSubmitted}>
+        <lightning-button
+          label={labels.CLOSE_BUTTON}
+          onclick={closeModal}
+          class="slds-p-left_small"
+          disabled={isCloseButtonDisabled}
+        >
+        </lightning-button>
+      </template>
+      <!--CANCEL BUTTON-->
+      <template lwc:else>
+        <lightning-button
+          label={labels.CANCEL_BUTTON}
+          onclick={closeModal}
+          class=""
+        >
+        </lightning-button>
+      </template>
+    </lightning-modal-footer>
+    <!--FOOTER BUTTONS END-->
+  </template>
+  <template lwc:else>
+    <lightning-spinner
+      alternative-text="Loading"
+      size="medium"
+    ></lightning-spinner>
+  </template>
+</template>

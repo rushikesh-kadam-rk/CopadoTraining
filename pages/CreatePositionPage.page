@@ -1,0 +1,18 @@
+<apex:page standardController="Position__c">
+    <apex:form >
+        <apex:pageBlock title="Enter Position Details">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" Action="{!Save}"/>
+               
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection >
+                <apex:inputField value="{!Position__c.Name}"/><br/>
+                <apex:inputField value="{!Position__c.Job_Description__c}"/><br/>
+                <apex:inputField value="{!Position__c.Status__c}"/>
+            </apex:pageBlockSection>
+            
+            
+        </apex:pageBlock>
+    </apex:form>
+  
+</apex:page>

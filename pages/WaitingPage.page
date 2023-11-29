@@ -1,0 +1,18 @@
+<apex:page standardController="Booking__c" extensions="NewBookingController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Confirm" action="{!bookTickets}"/>
+                <apex:commandButton value="Cancel" action="{!cancelBooking}"/>
+            </apex:pageBlockButtons>
+        <apex:pageBlockSection columns="1">
+            <h6 style='margin:50px'>Sorry...We don't have sufficient no of tickets. If you still want to book tickets in waiting list</h6><br></br>
+            <h6 style='margin:50px'>Click on Confirm to Book Tickets</h6>
+            <apex:outputText label="Confirmed Tickets: " value="{!booking.Confirmed_Tickets__c }"></apex:outputText>
+            <apex:outputText label="Waiting Tickets: " value="{!booking.Waiting_Tickets__c }"></apex:outputText>
+            
+        </apex:pageBlockSection>
+        
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

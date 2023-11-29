@@ -1,0 +1,20 @@
+<apex:page standardController="Position__c">
+  
+     <apex:form >
+          <apex:pageBlock title="DeletePosition Record" >
+              
+            <apex:pageBlockButtons >
+                 <apex:commandButton action="{!delete}" value="delete"/>
+      
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Position Record" columns="2">
+                 <apex:outputField value="{!Position__c.name}"/>
+                 <apex:outputField value="{!Position__c.Job_Description__c}"/>
+                 <apex:outputField value="{!Position__c.Status__c}"/>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>   
+            
+     </apex:form>      
+    
+</apex:page>

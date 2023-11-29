@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <decisions>
+        <name>Contact_User_Role_Evaluation</name>
+        <label>Contact User Role Evaluation</label>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>User Not part of ALB or ABNZ</defaultConnectorLabel>
+        <rules>
+            <name>User_Part_of_ALB</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CreatedBy.UserRole.DeveloperName</leftValueReference>
+                <operator>EndsWith</operator>
+                <rightValue>
+                    <stringValue>OTG</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CreatedBy.UserRole.DeveloperName</leftValueReference>
+                <operator>EndsWith</operator>
+                <rightValue>
+                    <stringValue>Grocery</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_ALB_User_Active</targetReference>
+            </connector>
+            <label>User Part of ALB</label>
+        </rules>
+        <rules>
+            <name>User_Part_of_ABNZ</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CreatedBy.UserRole.DeveloperName</leftValueReference>
+                <operator>EndsWith</operator>
+                <rightValue>
+                    <stringValue>ABNZ</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_ABNZ_User_Active</targetReference>
+            </connector>
+            <label>User Part of ABNZ</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>User_has_Role</name>
+        <label>User has Role?</label>
+        <locationX>578</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>No - Terminate</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Continue</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CreatedBy.UserRoleId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Contact_User_Role_Evaluation</targetReference>
+            </connector>
+            <label>Yes - Continue</label>
+        </rules>
+    </decisions>
+    <description>When Contact is created, if Account relationship field is populated, this flow will update the User Active field on related Account Contact Relationship record based on Role of User who has created the Contact</description>
+    <environments>Default</environments>
+    <interviewLabel>[Contact][After][Create] Flow Trigger {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>[Contact][After][Create] Flow Trigger</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_ABNZ_User_Active</name>
+        <label>Update ABNZ User Active</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>ABNZ_User_Active__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.AccountContactRelations</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_ALB_User_Active</name>
+        <label>Update ALB User Active</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>ALB_User_Active__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.AccountContactRelations</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>452</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>User_has_Role</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Contact</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

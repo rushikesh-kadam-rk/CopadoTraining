@@ -1,0 +1,19 @@
+<template>
+	<lightning-card variant="Narrow" title="Foreign Exchange Rates">
+		<div class="slds-p-horizontal_small">
+			<lightning-button variant="brand" label="Foreign Exchange Rates" onclick={handleShowExchangeRates}>
+			</lightning-button>
+
+			<h3 class="slds-section-title--divider">
+				<template lwc:if={response}>
+					Date: {response.date}
+				</template>
+			</h3>
+			<ul lass="slds-list--dotted">
+				<template for:each={listOfCurrency} for:item="rateList" for:index="index">
+					<li key={rateList}>{rateList}</li>
+				</template>
+			</ul>
+		</div>
+	</lightning-card>
+</template>

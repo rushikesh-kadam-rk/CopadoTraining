@@ -1,0 +1,35 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<aura:attribute name="recordId" type="String" 
+	  description="The record Id of object to be displayed"/>
+	<aura:attribute name="account" type="Object" 
+	  description="The record object to be displayed"/>
+	<aura:attribute name="accountRecord" type="Object" 
+	  description="A simplified view record object to be displayed"/>
+	<aura:attribute name="recordError" type="String" 
+	  description="An error message bound to force:recordData"/>
+
+	<force:recordData aura:id="record"
+		layoutType="FULL"
+		recordId="{!v.recordId}"
+		targetError="{!v.recordError}"
+		targetRecord="{!v.account}"
+		targetFields="{!v.accountRecord}"
+    fields="Name" 
+		mode="VIEW"/>
+	
+    <div class="slds-box">
+        <div class="slds-text-heading_medium">
+            Account Information
+        </div>
+     
+        <div class="slds-form--stacked slds-tile">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label"  >Name: </label>
+                <div class="slds-form-element__control">
+                  <ui:outputText class="slds-input" 
+                    value="{!v.accountRecord.Name}" />
+                </div>
+            </div>
+        </div> 
+    </div>
+</aura:component>

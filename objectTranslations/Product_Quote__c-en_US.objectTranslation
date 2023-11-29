@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Product Quote</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Product Quotes</value>
+    </caseValues>
+    <fields>
+        <label><!-- Gp --></label>
+        <name>Gp__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Product Quotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Product Cost --></label>
+        <name>Product_Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product GP --></label>
+        <name>Product_GP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Selling Price --></label>
+        <name>Selling_Price__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

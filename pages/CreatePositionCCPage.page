@@ -1,0 +1,25 @@
+<apex:page controller="PositionController" >
+    
+
+    <apex:form >
+        <apex:pageBlock >
+        
+            <apex:pageBlockSection >
+                <apex:inputField value="{!position.Name}"/><br/>
+                <apex:inputField value="{!position.Job_Description__c}"/><br/>
+                <apex:inputField value="{!position.Status__c}"/><br/>
+                
+            </apex:pageBlockSection>
+            
+            <!--<apex:pageBlockSection >
+                <apex:outputField value="{!position.Name}"/><br/>
+                <apex:outputField value="{!position.Job_Description__c}"/><br/>
+                <apex:outputField value="{!position.Status__c}"/><br/>
+                
+            </apex:pageBlockSection>-->
+            
+            
+        </apex:pageBlock>
+    </apex:form>
+  
+</apex:page>

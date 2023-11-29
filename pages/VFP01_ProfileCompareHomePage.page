@@ -1,0 +1,893 @@
+<apex:page controller="VFC01_VFP01_ProfileCompareHomePage" >
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+
+<script type="text/javascript">
+    var __sfdcSessionId = '{!GETSESSIONID()}';
+</script>
+
+<script src="../../soap/ajax/28.0/connection.js" type="text/javascript"></script>
+
+<script type="text/javascript"> 
+    var counterpos;
+    var records;
+    var orgID;
+    var maxCounter;
+    
+      
+    // This function is used to pull the org id of the current running salesforce org.
+    function getSFDefaultOrgID()
+    {
+        //Get the Default Org ID.
+        OIDResult = sforce.connection.query("SELECT Id From Organization_Details__c where MasterOrg__c=true");
+        OIDRecords = OIDResult.getArray("records");
+        var OIDRecord = OIDRecords[0];
+        return OIDRecord.Id;
+    }
+    
+    // This function is used to pull the org id of the salesforce org with which we are comparing the profiles.
+    function getSFCompareOrgID()
+    {
+        //Get the Org ID of the org with which we are comparing the profiles.
+        OIDResult = sforce.connection.query("SELECT Id From Organization_Details__c where MasterOrg__c=false");
+        OIDRecords = OIDResult.getArray("records");
+        var OIDRecord = OIDRecords[0];
+        return OIDRecord.Id;
+    }
+    
+    // This function is used to pull the org URL of the current running salesforce org.
+    function getSFDefaultOrgURL()
+    {
+        //Get the Default Org ID.
+        OIDResult = sforce.connection.query("SELECT orgURL__c From Organization_Details__c where MasterOrg__c=true");
+        OIDRecords = OIDResult.getArray("records");
+        var OIDRecord = OIDRecords[0];
+        return OIDRecord.orgURL__c;
+    }
+    
+    // This function initializes the deletion state for current running salesforce org.
+    function initializeDeletionState()
+    {
+        deletePro(getSFDefaultOrgID());
+    }
+    
+    // This function initializes the deletion state for org against which we are comparing our data.
+    function initializeDeletionStateDifOrg()
+    {
+        deletePro(getSFCompareOrgID());
+    }
+    
+    // This function deletes all the entities from the database related to last old deletion activity.
+    function deletePro(oID)
+    {
+        var rData = [];
+        dResult = sforce.connection.query("select Id from ProfileData__c where Organization_Details__c =\'" + oID + "\' and DataType__c = \'DeleteReportData\'");
+        dRecords = dResult.getArray("records");
+        for(var dr=0;dr<dRecords.length;dr++)
+            rData.push(dRecords[dr].Id);
+        if(rData.length>0)
+            deleteinBatches(rData);
+    }
+    
+    // This function validates the profile selections on the UI and it also verifies whether selected profile dataset is causing any apex governor limit of records more than 10k in one single transaction.
+    function processValidation(oID)
+    {
+        // This is queried to check whether we have selected any profiles or not,because all the selected profiles are stored against  DataProfileIDs datatype.
+        pdresult = sforce.connection.query("select Name from ProfileData__c where Organization_Details__c =\'" + oID + "\' and DataType__c = \'DataProfileIDs\'");
+        pdrecords = pdresult.getArray("records");
+        
+        // This query is used to check whether we deleted the records or we just dont deleted because of the apex governor limit.If we get a record that means we deleted else we got the governor limit issue.
+        presult = sforce.connection.query("select Name from ProfileData__c where Organization_Details__c =\'" + oID + "\' and DataType__c = \'DeleteReportData\'");
+        precords = presult.getArray("records");
+        
+        if(pdrecords.length == 0 && precords.length == 0)
+            alert('You have not selected any profile of which you want to delete the report data.Please select atleast one profile before hitting the Erase Report Data Button.!');
+        else if(precords.length == 0)
+            alert('Please narrow your profile deletion list,the current selection is crossing the apex governor limits.!');
+    }
+    
+    // This function is called when we hit the erase button for deleting the profiles from current org.
+    function validateSelection()
+    {
+        processValidation(getSFDefaultOrgID());
+    }
+    
+    // This function is called when we hot the erase button for deleting the profiles from different org.
+    function validateSelectionDifOrg()
+    {
+        processValidation(getSFCompareOrgID());
+    }
+    
+    // This functions validates the profile selection and displays the report in excel format to the end user.
+    function validateShowExcelReport()
+    {
+        var orgID = getSFDefaultOrgID();
+        
+        // This is queried to check whether we have selected any profiles or not,because all the selected profiles are stored against  DataProfileIDs datatype.
+        presult = sforce.connection.query("select Name from ProfileData__c where Organization_Details__c =\'" + orgID + "\' and DataType__c = \'DataProfileIDs\'");
+        precords = presult.getArray("records");
+        
+        // This is queried to check whether we have selected any items or not,because all the selected categories are stored against  DataCategories datatype.
+        pdresult = sforce.connection.query("select Name from ProfileData__c where Organization_Details__c =\'" + orgID + "\' and DataType__c = \'DataCategories\'");
+        pdrecords = pdresult.getArray("records");
+        
+        if(precords.length==0)
+        {
+            alert('You have not selected any profile for which you want to generate the report.Please select atleast one profile before hitting the Export Report to Excel Button.!');
+            return;
+        }
+        else if(pdrecords.length==0)
+        {
+            alert('You have not selected any data item for which you want to generate the report.Please select atleast one item before hitting the Export Report to Excel Button.!');
+            return;
+        }
+        
+        // This is queried to check whether we need to compare the profiles against profiles from different org and did we choose to turn on the difference highlighter.
+        pRTresult = sforce.connection.query("select Name,Data1__c from ProfileData__c where Organization_Details__c =\'" + orgID + "\' and DataType__c = \'ReportType\' LIMIT 1");
+        pRTrecords = pRTresult.getArray("records");
+        
+        var strWindowFeatures = "location=no,height=200,width=200,scrollbars=no,status=no";
+        var URL ='';
+        
+        // Data1__c field for datatype__c field value ReportType contains whether we are comparing the profile data against different org and Name field value tell us whether we have kept the difference highlighter on or not.
+        // There are 2 pages one for showing the differences if we are comparing the data against different org with difference highlighter on.
+        // The logic for showing the report data by these 2 pages are different.The logic used when the data is compared against different org with difference highlighter turn on is complex as compared to other page.
+        // When the profile selection count from UI is high we may end with the number of script statements apex governor limit issue.The page with less complex logic does not contain many apex statements which help us to extend this limit.
+        
+        if(pRTrecords[0].Data1__c =='Yes' && pRTrecords[0].Name == 'Yes')
+            URL = "/apex/VFP02_ReportExcel";
+        else
+            URL = "/apex/VFP03_ReportExcel";
+            
+        var win = window.open(URL, "_blank", strWindowFeatures);
+    }
+
+    // This functions read data for selected profiles one at time and parses/store that data for reporting.
+    function processAndParseData() 
+    {
+        var orgID = getSFDefaultOrgID();
+        
+        //Get selected profiles and build a set of ids
+        presult = sforce.connection.query("select Name from ProfileData__c where Organization_Details__c =\'" + orgID + "\' and DataType__c = \'ProfileIDs\'");
+        precords = presult.getArray("records");
+        
+        if(precords.length==0)
+        {
+            alert('You have not selected the profile for which you want to generate the data.Please select atleast one profile before hitting the Build Report Data Button.!');
+            return;
+        }
+        else if(precords.length>20)
+        {
+            alert('You can generate data for 20 profiles only at a time,Please select less than 20 profiles!.');
+            populateProfileList();
+            return;
+        }
+        
+        var strQuery = '';
+        for(var pr=0;pr<precords.length;pr++)
+            strQuery = strQuery + "\'" + precords[pr].Name + "\',"  ;
+        
+        strQuery = strQuery.slice(0,strQuery.length-1);
+        
+        strQuery = "SELECT id,Name,LastModifiedDate From Profile where id in (" + strQuery + ")" ;
+        
+        //Get all profile ids
+        result = sforce.connection.query(strQuery);
+        records = result.getArray("records");
+        var record = records[0];
+        maxCounter=records.length;
+       
+        counterpos =0;
+
+        if(location.href.indexOf('visualforce.com') == -1)
+            callAjaxReq(records[counterpos].Id,orgID);
+        else
+        {
+            pTabResult = sforce.connection.query("select Name from ProfileData__c where DataType__c = \'TabURL\'");
+            pTabRecords = pTabResult.getArray("records");
+            
+            if(pTabRecords.length == 0)
+            {
+                var tabData = [];
+                var profileTabData = new sforce.SObject("ProfileData__c");
+                profileTabData.Organization_Details__c = orgID;
+                profileTabData.DataType__c = 'TabURL';
+                profileTabData.Data1__c = location.href ;
+                tabData.push(profileTabData);
+                
+                 if(tabData.length >0)
+                    insertinBatches(tabData);
+            }
+            
+            alert('You are now being redirected to home tab.Please let the home page load completely and then click buildreportdata custom link under profile compare on the left hand sidebar.!');
+            window.location.assign(getSFDefaultOrgURL() + 'home/home.jsp');
+        }            
+    }
+    
+    // This function process the ajax response,parse it and store the data in the table.
+    function callAjaxReq(pUrl,orgID)
+    {
+        var dData = [];
+        dResult = sforce.connection.query("SELECT Id From ProfileData__c where Organization_Details__c =\'" + orgID + "\' and name = '" + records[counterpos].Name.trim() + "'");
+        dRecords = dResult.getArray("records");
+        for(var dr=0;dr<dRecords.length;dr++)
+            dData.push(dRecords[dr].Id);
+
+         // if out of synch profile data is available then delete that first before generating the fresh data for the profile.
+        if(dData.length >0)
+            deleteinBatches(dData);
+    
+        // Store the lastmodifieddate for the profile at current time.
+        var pfData = [];
+        var profileData = new sforce.SObject("ProfileData__c");
+        profileData.Organization_Details__c = orgID;
+        profileData.Name = records[counterpos].Name;
+        profileData.DataType__c = 'DateTimeStamp'  ;
+        profileData.DTime__c = records[counterpos].LastModifiedDate;
+        pfData.push(profileData);
+        var result = sforce.connection.create(pfData);  
+        pUrl = getSFDefaultOrgURL() + pUrl;  
+       
+        jQuery.ajax({
+        type: "POST",
+        url: pUrl,
+        error: function (jsonRes)
+        {
+            alert('There is some problem with generating the html source code.Please contact your system administrator.');
+        },
+        success: function (jsonRes)
+        {
+               // Control can go out of this function only once.
+               parseandprocesses(jsonRes,orgID);
+               
+               if(++counterpos<maxCounter)
+                   callAjaxReq(records[counterpos].Id,orgID);
+               else
+                   populateProfileList() ;    
+        }
+        });
+    }
+
+    // This function parse and processes the data for different section of a profile.
+    function parseandprocesses(jsonRes,orgID)
+    {
+        var arrProfileElements = new Array();
+        arrProfileElements[0] = "Standard Tab Settings</h4>";
+        arrProfileElements[1] = "Standard Record Type Settings</h4>";
+        arrProfileElements[2] = "<h3>Administrative Permissions";
+        arrProfileElements[3] = "<h3>Standard Object Permissions";
+        arrProfileElements[4] = "<h3>Desktop Integration Clients";
+        arrProfileElements[5] = "<h3>Login Hours</h3>";
+        arrProfileElements[6] = "Login IP Ranges</h3>";
+        arrProfileElements[7] = "Login IP Ranges";
+        arrProfileElements[8] = "Enabled Apex Class Access</h3>";
+        arrProfileElements[9] = "Enabled Visualforce Page Access</h3>";
+
+        // Build the profile name from the json response
+        var strProfileName = jsonRes.slice(jsonRes.indexOf('<title>'),jsonRes.indexOf('</title>'));
+        strProfileName = strProfileName.slice(strProfileName.indexOf(':')+2,strProfileName.indexOf('~'));
+        strProfileName  = strProfileName.replace('&amp', '&').replace(';','');
+        
+        var strInputs='';
+        
+        // This array holds the parse elements from json response and then finally it gets inserted in salesforce ProfileData__c object.
+        var pData = [];
+
+        // Custom App Settings source code snippet that actually process and parse the json response.
+        if(jsonRes.indexOf('<h3>Custom App Settings') != -1)
+        {
+            var strEndString ='';
+            for(var i=0;i<10;i++)
+            {
+                if(jsonRes.indexOf(arrProfileElements[i]) != -1)
+                {
+                    strEndString = arrProfileElements[i];
+                    break;
+                }
+            }
+        
+            strInputs = jsonRes.slice(jsonRes.indexOf('<h3>Custom App Settings'),jsonRes.indexOf(strEndString));                      
+            var strRTRows = strInputs.split('labelCol">');
+            var strLen = strRTRows.length;
+
+            for(var i=1;i<strLen;i++)
+            {
+                var strName = strRTRows[i].slice(0,strRTRows[i].indexOf('</td>'));
+                var strElements = strRTRows[i].split('alt="');
+                
+                for(j=1;j<strElements.length;j++)
+                {
+                    var strfName = strElements[j];
+                    strElements[j] = strElements[j].slice(0,strElements[j].indexOf('" width'));
+                }
+            
+                var asData = new sforce.SObject("ProfileData__c");
+                asData.Organization_Details__c = orgID;
+                asData.Name = strProfileName;
+                asData.DataType__c = 'Custom App Settings';
+                asData.Data1__c = strName;
+                asData.Data2__c = strElements[1];
+                asData.Data3__c = strElements[2];    
+                pData.push(asData);
+                
+                if(i==(strLen-1))
+                {
+                    // This is done for last row because it contains labelCol last and not labelCol
+                    var sRT = strRTRows[i].split('labelCol last">');
+                    
+                    for(var k=1;k<sRT.length;k++)
+                    {
+                        var sName = sRT[k].slice(0,sRT[k].indexOf('</td>'));
+                        var strElements = sRT[k].split('alt="');
+                        
+                        for(m=1;m<strElements.length;m++)
+                        {
+                            strElements[m] = strElements[m].slice(0,strElements[m].indexOf('" width'));
+                        }
+                    
+                        var aData = new sforce.SObject("ProfileData__c");
+                        aData.Organization_Details__c = orgID;
+                        aData.Name = strProfileName;
+                        aData.DataType__c = 'Custom App Settings';
+                        aData.Data1__c = sName;
+                        aData.Data2__c = strElements[1];
+                        aData.Data3__c = strElements[2];    
+                        pData.push(aData);
+                    }
+              }  
+            }
+        }
+
+        // Standard and Custom Tab Settings source code snippet that actually process and parse the json response.
+        if(jsonRes.indexOf('Standard Tab Settings</h4>') != -1)
+        {
+            strInputs = jsonRes.slice(jsonRes.indexOf('Standard Tab Settings</h4>'),jsonRes.indexOf('Custom Tab Settings</h4>'));                      
+            strRTRows = strInputs.split('labelCol');
+            strLen = strRTRows.length;
+            
+            for(var i=1;i<strLen;i++)
+            {
+                var strName = strRTRows[i].slice(2,strRTRows[i].indexOf('</td>'));
+                strName = strName.replace('ast">','');
+                var strValue = strRTRows[i].slice(strRTRows[i].indexOf('<td class='),strRTRows[i].lastIndexOf('</td>'));
+                strValue = strValue.slice(strValue.indexOf('>')+1);
+                
+                var stData = new sforce.SObject("ProfileData__c");
+                stData.Organization_Details__c = orgID;
+                stData.Name = strProfileName;
+                stData.DataType__c = 'Tab Settings';
+                stData.Data1__c = strName;
+                stData.Data2__c = strValue;
+                
+                if(strValue.trim().length>6)
+                    pData.push(stData);
+            }
+            
+            strInputs = jsonRes.slice(jsonRes.indexOf('Custom Tab Settings</h4>'),jsonRes.indexOf('<h3>Record Type Settings'));                      
+            strRTRows = strInputs.split('labelCol');
+            strLen = strRTRows.length;
+            
+            for(var i=1;i<strLen;i++)
+            {
+                var strName = strRTRows[i].slice(2,strRTRows[i].indexOf('</td>'));
+                strName = strName.replace('ast">','');
+                var strValue = strRTRows[i].slice(strRTRows[i].indexOf('<td class='),strRTRows[i].lastIndexOf('</td>'));
+                strValue = strValue.slice(strValue.indexOf('>')+1);
+                
+                var stData = new sforce.SObject("ProfileData__c");
+                stData.Organization_Details__c = orgID;
+                stData.Name = strProfileName;
+                stData.DataType__c = 'Tab Settings';
+                stData.Data1__c = strName; // Remove i if you want to show duplicate items only once (old statement stData.Data1__c = i + '-' + strName;)
+                stData.Data2__c = strValue;
+                if(strValue.trim().length>6)
+                pData.push(stData);
+            }
+        }
+                                   
+        // Record Type Settings source code snippet that actually process and parse the json response.
+        if(jsonRes.indexOf('<h3>Record Type Settings') != -1)
+        {
+            var strEndString ='';
+            if(jsonRes.indexOf('Custom Record Type Settings</h4>') != -1)
+                strEndString = 'Custom Record Type Settings</h4>';
+            else
+                strEndString = '<h3>Administrative Permissions';
+            
+            strInputs = jsonRes.slice(jsonRes.indexOf('<h3>Record Type Settings'),jsonRes.indexOf(strEndString));                      
+            strRTRows = strInputs.split('labelCol');
+            strLen = strRTRows.length;
+            
+            for(var i=1;i<strLen;i++)
+            {
+                var strName = strRTRows[i].slice(2,strRTRows[i].indexOf('</td>'));
+                strName = strName.replace('ast">','');
+                var strValue = strRTRows[i].slice(strRTRows[i].indexOf('<td class='),strRTRows[i].lastIndexOf('<br/>')+1);
+                strValue = strValue.slice(strValue.indexOf('>')+1);
+                strValue = strValue.slice(0,strValue.lastIndexOf('</td>'));
+                strValue = strValue + '-'; 
+                strValue = strValue.split('').reverse().join('');
+                var totRecs;
+                var sLen = strValue.length;
+                // Split the long text in chunks of 255 characters and store the data for report.
+                totRecs = sLen/255;
+                for(p=0;p<totRecs;p++)
+                {           
+                    var rtData = new sforce.SObject("ProfileData__c");
+                    var sV = '';
+                    rtData.Organization_Details__c = orgID;
+                    rtData.Name = strProfileName;
+                    rtData.DataType__c = 'Record Type Settings';
+                    rtData.Data1__c = strName;
+                    
+                    if(((p+1)*255)< sLen)
+                        sV = strValue.slice((p*255),(p*255) + 255)
+                    else
+                        sV = strValue.slice((p*255),sLen);
+                        
+                    rtData.Data2__c = sV.split('').reverse().join(''); 
+                    if(strName.indexOf('mpty l')==-1)    
+                    pData.push(rtData);
+                }
+            }
+            if(jsonRes.indexOf('Custom Record Type Settings</h4>') != -1)
+            {    
+                strInputs = jsonRes.slice(jsonRes.indexOf('Custom Record Type Settings</h4>'),jsonRes.indexOf('<h3>Administrative Permissions'));                      
+                strRTRows = strInputs.split('labelCol');
+                strLen = strRTRows.length;
+                
+                var iCounter = 0;
+        
+                if(strRTRows[strLen-1].slice(2,strRTRows[strLen-1].indexOf('</td>')) != strRTRows[strLen-1].slice(2,strRTRows[strLen-1].indexOf('</td>')).replace('mpty last',''))
+                    iCounter=strLen-1;
+                else
+                    iCounter=strLen;
+                
+                for(var i=1;i<iCounter;i++)
+                {
+                    var strName = strRTRows[i].slice(2,strRTRows[i].indexOf('</td>'));
+                    strName = strName.replace('ast">','');
+                    var strValue = strRTRows[i].slice(strRTRows[i].indexOf('<td class='),strRTRows[i].lastIndexOf('<br/>')+1);
+                    strValue = strValue.slice(strValue.indexOf('>')+1);
+                    strValue = strValue.slice(0,strValue.lastIndexOf('</td>'));
+                    strValue = strValue + '-'; 
+                    strValue = strValue.split('').reverse().join('');
+                    var totRecs;
+                    var sLen = strValue.length;
+                    totRecs = sLen/255;
+                    for(p=0;p<totRecs;p++)
+                    {           
+                        var rtData = new sforce.SObject("ProfileData__c");
+                        var sV = '';
+                        rtData.Organization_Details__c = orgID;
+                        rtData.Name = strProfileName;
+                        rtData.DataType__c = 'Record Type Settings';
+                        rtData.Data1__c = strName;
+                        
+                        if(((p+1)*255)< sLen)
+                            sV = strValue.slice((p*255),(p*255) + 255)
+                        else
+                            sV = strValue.slice((p*255),sLen);
+        
+                        rtData.Data2__c = sV.split('').reverse().join('');  
+                        if(strName.indexOf('mpty l')==-1)  
+                        pData.push(rtData);
+                    }
+                }
+            }
+        }
+                
+        // Administrative and General User Permission source code snippet that actually process and parse the json response.
+        if(jsonRes.indexOf('<h3>Administrative Permissions') != -1)
+        {
+            strInputs = jsonRes.slice(jsonRes.indexOf('<h3>Administrative Permissions'),jsonRes.indexOf('<h3>General User Permissions'));
+            var strAGRows = strInputs.split('labelCol');
+            var strLen = strAGRows.length;
+            
+            for(var i=1;i<strLen-1;i++)
+            {
+                var strName = strAGRows[i].slice(2,strAGRows[i].indexOf('</td>'));
+                strName = strName.replace('ast">','');
+                var strValue = strAGRows[i].slice(strAGRows[i].indexOf('alt="')+5,strAGRows[i].indexOf('" width'));
+                var agData = new sforce.SObject("ProfileData__c");
+                agData.Organization_Details__c = orgID;
+                agData.Name = strProfileName;
+                agData.DataType__c = 'Administrative & General User Permissions';
+                agData.Data1__c = strName;
+                agData.Data2__c = strValue;    
+                pData.push(agData);
+            }
+            
+            strInputs = jsonRes.slice(jsonRes.indexOf('<h3>General User Permissions'),jsonRes.indexOf('<h3>Standard Object Permissions'));
+            var strAGRows = strInputs.split('labelCol');
+            var strLen = strAGRows.length;
+            
+            for(var i=1;i<strLen-1;i++)
+            {
+                var strName = strAGRows[i].slice(2,strAGRows[i].indexOf('</td>'));
+                strName = strName.replace('ast">','');
+                var strValue = strAGRows[i].slice(strAGRows[i].indexOf('alt="')+5,strAGRows[i].indexOf('" width'));
+                var agData = new sforce.SObject("ProfileData__c");
+                agData.Organization_Details__c = orgID;
+                agData.Name = strProfileName;
+                agData.DataType__c = 'Administrative & General User Permissions';
+                agData.Data1__c = strName;
+                agData.Data2__c = strValue;    
+                pData.push(agData);
+            }
+        }
+                
+        // Standard and Custom Object Permission source code snippet that actually process and parse the json response.
+        if(jsonRes.indexOf('<h3>Standard Object Permissions') != -1)
+        {
+            var strEndString ='';
+            for(var i=4;i<10;i++)
+            {
+                if(jsonRes.indexOf(arrProfileElements[i]) != -1)
+                {
+                    strEndString = arrProfileElements[i];
+                    break;
+                }
+            }
+            
+            strInputs = jsonRes.slice(jsonRes.indexOf('<h3>Standard Object Permissions'),jsonRes.indexOf(strEndString));
+            var strCORows = strInputs.split('scope="row"');
+            var strCOName='';
+            strLen = strCORows.length;
+            
+            for(var i=1;i<strLen;i++)
+            {
+                var strElements = strCORows[i].split('alt="');
+                
+                for(j=1;j<strElements.length;j++)
+                {
+                    var strfName = strElements[j];
+                    strElements[j] = strElements[j].slice(0,strElements[j].indexOf('" width'));
+                }
+                
+                var coData = new sforce.SObject("ProfileData__c");
+                coData.Organization_Details__c = orgID;
+                coData.Name = strProfileName;
+                coData.DataType__c = 'Object Permissions';
+                coData.Data1__c = strCORows[i].slice(1,strCORows[i].indexOf('</TH>'));
+                coData.Data2__c = strElements[1];    //Read
+                coData.Data3__c = strElements[2];    //Create
+                coData.Data4__c = strElements[3];    //Edit
+                coData.Data5__c = strElements[4];    //Delete
+                coData.Data6__c = strElements[5];    //ViewAll
+                coData.Data7__c = strElements[6];    //ModifyAll
+                pData.push(coData);
+            }
+        }
+                
+        // Desktop Integration Clients source code snippet that actually process and parse the json response.
+        if(jsonRes.indexOf('<h3>Desktop Integration Clients') != -1)
+        {
+            var strEndString ='';
+            for(var i=5;i<10;i++)
+            {
+                if(jsonRes.indexOf(arrProfileElements[i]) != -1)
+                {
+                    strEndString = arrProfileElements[i];
+                    break;
+                }
+            }
+            
+            strInputs = jsonRes.slice(jsonRes.indexOf('<h3>Desktop Integration Clients'),jsonRes.indexOf(strEndString));
+            strInputs = strInputs.slice(0,strInputs.indexOf('/table'));
+            var strDIRows = strInputs.split('<tr>');
+            var strDIName='';
+            strLen = strDIRows.length;
+            
+            for(var i=1;i<strLen;i++)
+            {
+                var strElements = strDIRows[i].split('labelCol');
+                
+                for(j=1;j<strElements.length;j++)
+                {
+                    var strfName = strElements[j];
+                    strfName = strfName.slice(strfName.indexOf('>')+1,strfName.indexOf('</td>'));
+                    var strfValue = strElements[j];
+                    strfValue = strfValue.slice(1,strfValue.lastIndexOf('</td>'));
+                    strfValue = strfValue.slice(strfValue.lastIndexOf('>')+1);
+                    var diData = new sforce.SObject("ProfileData__c");
+                    diData.Organization_Details__c = orgID;
+                    diData.Name = strProfileName;
+                    diData.DataType__c = 'Desktop Integration Clients';
+                    diData.Data1__c = strfName ;
+                    diData.Data2__c = strfValue;
+                    if(strfName.length>6)
+                    pData.push(diData);
+                }
+            }
+        }
+                                              
+        // Login Hours HTML source code snippet that actually process and parse the json response.
+        if(jsonRes.indexOf('<h3>Login Hours</h3>') != -1)
+        {
+            var strEndString ='';
+            for(var i=6;i<10;i++)
+            {
+                if(jsonRes.indexOf(arrProfileElements[i]) != -1)
+                {
+                    strEndString = arrProfileElements[i];
+                    break;
+                }
+            }
+            
+            strInputs = jsonRes.slice(jsonRes.indexOf('<h3>Login Hours</h3>'),jsonRes.indexOf(strEndString)); //IP End Address
+            var strHoursRows = strInputs.split('ListRow');
+            var strHoursName='';
+            strLen = strHoursRows.length;
+            if(strLen==1)
+            {
+                    for(var i=1;i<8;i++)
+                    {
+                        var wday='';
+                        if(i==1)
+                            wday='Sunday';
+                        else if(i==2)
+                            wday='Monday';
+                        else if(i==3)
+                            wday='Tuesday';
+                        else if(i==4)
+                            wday='Wednesday';
+                        else if(i==5)
+                            wday='Thursday';
+                        else if(i==6)
+                            wday='Friday';
+                        else
+                            wday='Saturday';
+                    
+                        var hData = new sforce.SObject("ProfileData__c");
+                        hData.Organization_Details__c = orgID;
+                        hData.Name = strProfileName;
+                        hData.DataType__c = 'Login Hours';
+                        hData.Data1__c = wday;
+                        hData.Data2__c = 'Not';
+                        hData.Data3__c = 'Configured';
+                        pData.push(hData);
+                    }
+            }
+            else
+            {
+                for(var i=1;i<strLen;i++)
+                {
+                    strHoursName  = strHoursRows[i];
+                    strHoursElements = strHoursName.split('dataCell  ">');
+                    var wday = strHoursElements[1].slice(0,strHoursElements[1].indexOf('</th>')) ;
+                    var startTime = strHoursElements[2].slice(0,strHoursElements[2].indexOf('</td>')) ;
+                    var endTime = strHoursElements[3].slice(0,strHoursElements[3].indexOf('</td>')) ;
+                    var hData = new sforce.SObject("ProfileData__c");
+                    hData.Organization_Details__c = orgID;
+                    hData.Name = strProfileName;
+                    hData.DataType__c = 'Login Hours';
+                    hData.Data1__c = wday;
+                    hData.Data2__c = startTime;
+                    hData.Data3__c = endTime;
+                    pData.push(hData);
+                }
+            }
+        }
+
+        // Login IP Ranges HTML source code snippet that actually process and parse the json response.
+        if(jsonRes.indexOf('Login IP Ranges</h3>') != -1)
+        {
+            strInputs = jsonRes.slice(jsonRes.indexOf('Login IP Ranges</h3>'),jsonRes.lastIndexOf('Login IP Ranges'));
+            var strIPRows = strInputs.split('ListRow');
+            var strIPName='';
+            strLen = strIPRows.length;
+            
+            for(var i=1;i<strLen;i++)
+            {
+                strIPName  = strIPRows[i];
+                
+                if(i<(strLen-1))
+                    strIPName = strIPName.slice(strIPName.indexOf('th scope')+35,strIPName.lastIndexOf('</td></tr>'))
+                else
+                    strIPName = strIPName.slice(strIPName.indexOf('th scope')+35,strIPName.indexOf('</td></tr>'))
+                
+                var startAddress = strIPName.slice(0,strIPName.indexOf('</th>')) ;
+                var endAddress = strIPName.slice(strIPName.lastIndexOf('>')+1);
+                var ipData = new sforce.SObject("ProfileData__c");
+                ipData.Organization_Details__c = orgID;
+                ipData.Name = strProfileName;
+                ipData.DataType__c = 'Login IP Ranges';
+                ipData.Data1__c = startAddress;
+                ipData.Data2__c = endAddress;
+                pData.push(ipData);
+            }
+        }
+
+        // Apex Class HTML source code snippet that actually process and parse the json response.
+        if(jsonRes.indexOf('Enabled Apex Class Access</h3>') != -1)
+        {
+            strInputs = jsonRes.slice(jsonRes.indexOf('Enabled Apex Class Access</h3>'),jsonRes.lastIndexOf('Enabled Apex Class Access'));
+            var strACRows = strInputs.split('ListRow');
+            var strACName='';
+            strLen = strACRows.length;
+            
+            for(var i=1;i<strLen;i++)
+            {
+                strACName  = strACRows[i];
+                strACName = strACName.slice(strACName.indexOf('<a href=')+27,strACName.indexOf('</a>'))
+                var apexData = new sforce.SObject("ProfileData__c");
+                apexData.Organization_Details__c = orgID;
+                apexData.Name = strProfileName;
+                apexData.DataType__c = 'Apex Class Access';
+                apexData.Data1__c = strACName;
+                if(strACName.trim().length>0)
+                pData.push(apexData);
+            }
+        }
+               
+        // Visual Force Page HTML source code snippet
+        if(jsonRes.indexOf('Enabled Visualforce Page Access</h3>') != -1)
+        {
+            strInputs = jsonRes.slice(jsonRes.indexOf('Enabled Visualforce Page Access</h3>'),jsonRes.lastIndexOf('Enabled Visualforce Page Access'));
+            var strVFRows = strInputs.split('ListRow');
+            var strVFName='';
+            strLen = strVFRows.length;
+            for(var i=1;i<strLen;i++)
+            {
+                strVFName  = strVFRows[i];
+                strVFName = strVFName.slice(strVFName.indexOf('<a href=')+27,strVFName.indexOf('</a>'))
+                var vfData = new sforce.SObject("ProfileData__c");
+                vfData.Organization_Details__c = orgID;
+                vfData.Name = strProfileName;
+                vfData.DataType__c = 'Visualforce Page Access';
+                vfData.Data1__c = strVFName;
+                if(strVFName.trim().length>0)
+                pData.push(vfData);
+            }
+        }
+        
+        // Populate the profile data
+        if(pData.length >0)
+        insertinBatches(pData);
+    }
+    
+
+    // Function to insert the records in batches of 200
+    function insertinBatches(pData)
+    {
+            if(pData.length >0)
+            {
+                if(pData.length<=200)
+                {
+                    var result = sforce.connection.create(pData);  
+                }
+                else
+                {
+                     for(var batchCount=0;batchCount<pData.length;batchCount=batchCount+200)
+                     {
+                         var result1;
+                         if((batchCount+200)<pData.length)
+                             result1 = sforce.connection.create(pData.slice(batchCount,batchCount + 200));
+                         else
+                             result1 = sforce.connection.create(pData.slice(batchCount,pData.length));
+                             
+                               for (var i=0; i<result1.length; i++) {
+                               if (result1[i].getBoolean("success")) {
+                               } else {
+                                   //alert(result1[i]);
+                               }
+                               }
+                     }
+                }
+            }
+    }
+    
+    // Function to delete the records in batches of 200
+    function deleteinBatches(dData)
+    {
+            if(dData.length >0)
+            {
+                if(dData.length<=200)
+                {
+                    var result = sforce.connection.deleteIds(dData);  
+                }
+                else
+                {
+                     for(var batchCount=0;batchCount<dData.length;batchCount=batchCount+200)
+                     {
+                         var result1;
+                         if((batchCount+200)<dData.length)
+                             result1 = sforce.connection.deleteIds(dData.slice(batchCount,batchCount + 200));
+                         else
+                             result1 = sforce.connection.deleteIds(dData.slice(batchCount,dData.length));
+                             
+                               for (var i=0; i<result1.length; i++) {
+                               if (result1[i].getBoolean("success")) {
+                               } else {
+                                   //alert(result1[i]);
+                               }
+                               }
+                     }
+                }
+            }
+    }
+ 
+</script>
+<apex:actionRegion >
+<apex:form >
+<apex:outputPanel id="availableList">
+        <font color="RED"><apex:pageMessages /></font>
+        
+        <apex:pageBlock title="Welcome to Profile Compare !" >
+            <table width="100%" >
+                <tr>
+                    <td width="45%">
+                    <b>Profiles with no report data,select the profiles and generate the data :&nbsp;<font color="blue">{!ProfileList.size}</font></b><br/><br/>
+                        <apex:selectList id="objs" multiselect="true" value="{!pVals}" size="15"  style="width:100%;align:left" >
+                            <apex:selectOptions value="{!ProfileList}"/>
+                        </apex:selectList>
+                        <apex:commandButton value="Build Report Data" title="Generate Report Data for selected profiles." action="{!storeSelectedProfiles}"  oncomplete="processAndParseData();" reRender="availableList" />
+                        <br/>
+                        <apex:outputPanel id="processStatus">
+                            <apex:outputtext rendered="{!IsStatusMsgVisible}" ><font color="red"><b>Please wait system is generating the data for you.On successful completion you will see the profile(s) in below box...</b></font></apex:outputtext>
+                        </apex:outputPanel>
+                        <br/><br/>
+                    </td>
+                    <td width="10%"></td>
+                    <td width="45%">
+                    <b>Profiles from different org available for comparison :&nbsp;<font color="blue">{!AvailableProfileListDifOrg.size}</font></b><br/><br/>
+                        <apex:selectList size="15" value="{!pSelValsDifOrg}" disabled="{!if(AvailableProfileListDifOrg.size==0,true,false)}" multiselect="true" style="width:100%;align:left"  >
+                                    <apex:selectOptions value="{!AvailableProfileListDifOrg}"/>
+                        </apex:selectList>
+                        <apex:commandButton value="Erase Report Data" onclick="initializeDeletionStateDifOrg();" title="Delete Report Data for the selected profiles." disabled="{!if(AvailableProfileListDifOrg.size==0,true,false)}" action="{!removeReportDataDifOrg}" oncomplete="validateSelectionDifOrg();" reRender="availableList" status="deleteStatusDifOrg" />
+                       <font color="red"><b><apex:actionStatus startText="Please wait system is removing the report data for you..." stopText="" id="deleteStatusDifOrg"/></b></font>
+                        <br/><br/>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%">
+                <tr>
+                    <td width="45%">
+                        <apex:outputPanel id="selectedPro">
+                        <b>Profiles with report data available for comparison,select the profiles of your choice and export the report :&nbsp;<font color="blue">{!AvailableProfileList.size}</font></b><br/><br/>
+                            <apex:actionFunction name="populateProfileList" action="{!queryandPopulateProfiles}" />
+                            <apex:selectList size="15" value="{!pSelVals}" multiselect="true" style="width:100%;align:left"  >
+                                <apex:selectOptions value="{!AvailableProfileList}"/>
+                            </apex:selectList>
+                       <apex:commandButton value="Erase Report Data" onclick="initializeDeletionState();" title="Delete Report Data for the selected profiles." disabled="{!if(AvailableProfileList.size==0,true,false)}" action="{!removeReportData}" oncomplete="validateSelection();" reRender="availableList" status="deleteStatus" />
+                       <font color="red"><b><apex:actionStatus startText="Please wait system is removing the report data for you..." stopText="" id="deleteStatus"/></b></font>
+                        <br/><br/>
+                        </apex:outputPanel>
+                    </td>
+                    <td width="10%"></td>
+                    <td width="45%">
+                        <b>Items to Compare.Choose any or all as per your need:</b><br/><br/>&nbsp;
+                        
+                        <apex:selectList disabled="{!if(AvailableProfileList.size==0,true,false)}" id="items" multiselect="true" value="{!itemVals}" size="15"  style="width:100%;align:left" >
+                            <apex:selectOptions value="{!ItemsToCompare}"/>
+                        </apex:selectList>
+                        <br/><br/>
+                   </td>   
+               </tr>
+                <tr>
+                    <td align="left" width="45%" colspan="3">
+                        <b>Are you comparing the profile(s) from different environments ? 
+                         <apex:selectList disabled="{!if(AvailableProfileList.size==0 || AvailableProfileListDifOrg.size==0,true,false)}" value="{!oVal}" size="1" >
+                            <apex:selectOptions value="{!OrgCompareValues}"/>
+                        </apex:selectList> if yes,do you also want to see the differences higlighted in the extracted report.</b>&nbsp;&nbsp;
+                        <apex:selectList disabled="{!if(AvailableProfileList.size==0 || AvailableProfileListDifOrg.size==0,true,false)}" value="{!cVal}" size="1">
+                            <apex:selectOptions value="{!CompareValues}"/>
+                        </apex:selectList><br/><br/>
+                        <Font color="Black" size="1">Note : Turning on the difference highlighter will show you all the differences in red between the profiles from different orgs however this option will then reduce your profiles selection count due to governor limits.If you keep this option off then you won't see the differences higlighted in red and system will expand your profile selection count i.e you can include more profiles on the report in one single go.</Font>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center">
+                        <br/>
+                        <apex:commandButton value="Export Report to Excel" title="Export Report for the selected profiles in excel." disabled="{!if(AvailableProfileList.size==0,true,false)}" action="{!storeDataReportProfiles}" oncomplete="validateShowExcelReport();"/>
+                    </td>
+                </tr>
+            </table>
+        </apex:pageBlock>
+        </apex:outputPanel>        
+</apex:form>
+</apex:actionRegion>
+</apex:page>

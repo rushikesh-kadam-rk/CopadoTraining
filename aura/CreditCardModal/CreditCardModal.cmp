@@ -1,0 +1,156 @@
+<aura:component controller="EB_CaseReplacementProductUtility" >
+    <aura:attribute name="showModal" type="boolean" default="true"/>
+    <aura:attribute name="profile" type="Object" />
+    <aura:attribute name="user" type="Object" />
+    <aura:attribute name="caseRecord" type="Object" />
+    <!-- CaseMR is the official variable that we will be passing down to the apex layer to save -->
+    <aura:attribute name="caseMR" type="Object" default="{
+                                                         'sobjectType': 'caseMR',
+                             'Validation_Error_Message__c': '',
+                             'CC_Card_Name__c': '',
+                             'CC_Card_Number__c': 1234567, 
+                             'CC_Card_Month__c': 12,
+                             'CC_Card_Year__c': 2030
+                                                         }"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="cardTypeOptions" type="List"/>
+    <aura:attribute name="stateOptions" type="List"/>
+    <aura:attribute name="yearOptions" type="List"/>
+    <aura:attribute name="monthOptions" type="List"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="disableChargeCardButton" type="Boolean"/>
+    <aura:handler name="change" value="{!v.caseRecord}" action="{!c.checkCaseRecord}"/>
+
+	<aura:method name="showCreditCardModal" action="{!c.showModal}" access="public"/>
+
+    <!-- Possibilities: address, card -->
+    <aura:attribute name="stage" type="String" default="card"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="cmpEvent" type="c:CloseModalEvent" />
+    <aura:if isTrue="{!v.showModal}" >
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" 
+                 aria-modal="true" aria-describedby="modal-content-id-1" 
+                 class="slds-modal slds-fade-in-open">
+            <aura:html tag="style">
+                .toastMessage.forceActionsText{width: 25rem !important; display: block !important;}
+            </aura:html>
+        <div class="slds-modal__container">
+            <aura:if isTrue="{!v.stage =='validation'}">
+                <header class="slds-modal__header">
+                    <div class="slds-text-heading_large slds-text-color_error slds-hyphenate">
+                        Sales Case Validation Rule Errors</div>
+                </header>
+ 			</aura:if>           
+            <aura:if isTrue="{!v.stage =='card'}">
+                <header class="slds-modal__header">
+                    <div class="slds-text-heading_medium slds-hyphenate">
+                        Credit Card Information</div>
+                </header>
+ 			</aura:if>           
+            	<div 
+                     class="slds-modal__content slds-p-around_medium slds-text-align_left modal-height">
+                    <aura:if isTrue="{!v.showSpinner}">
+                        <lightning:spinner variant="brand" size="medium"/>
+                    </aura:if>
+                
+                    <!-- Modal Content here -->
+                    <div class="slds-grid slds-wrap">
+                        <aura:if isTrue="{!v.stage =='validation'}">
+                        <!-- Customer Phone Number -->
+                            <label class="slds-text-heading_medium slds-text-color_error" 
+                                   for="text-input-id-0" id="inline-text-label">
+                                Please correct the following errors on this case:</label>
+                            <ui:outputText class="slds-size_1-of-1 slds-p-horizontal_xx-small"
+                                           value="{!v.caseMR.Validation_Error_Message__c}" />
+                        </aura:if>
+                                                
+                        <aura:if isTrue="{!v.stage =='card'}">
+                            <!-- Card Name -->
+                            <lightning:input aura:id="MyName"
+                                             class="slds-size_1-of-1 slds-p-horizontal_xx-small"
+                                             label="Name on Credit Card" required="true"
+                                             value="{!v.caseMR.CC_Card_Name__c}"  />
+                            <!-- Card Number -->
+                            <lightning:input class="slds-size_1-of-1 slds-p-horizontal_xx-small" 
+                                             maxlength="16" label="Card Number" 
+                                             value="{!v.caseMR.CC_Card_Number__c}" />
+                            <!-- Card Expiration Month -->
+                            <lightning:combobox aura:id="myExpMonth" 
+                                                class="slds-size_1-of-3 slds-p-horizontal_xx-small" 
+                                                label="Expiration Month" required="true" 
+                                                placeholder="Select Expiration Month" 
+                                                options="{! v.monthOptions }" 
+                                                value="{!v.caseMR.CC_Card_Month__c}"/>
+                            <!-- Card Expiration Year -->
+                            <lightning:combobox aura:id="myExpYear" 
+                                                class="slds-size_1-of-3 slds-p-horizontal_xx-small" 
+                                                label="Expiration Year" required="true" 
+                                                placeholder="Select Expiration Year" 
+                                                options="{! v.yearOptions }" 
+                                                value="{!v.caseMR.CC_Card_Year__c}"/>
+                            <!--  Card CVV  -->
+                            <lightning:input class="slds-size_1-of-3 slds-p-horizontal_xx-small" 
+                                             maxlength="5" 
+                                             label="Card CVC" required="true" 
+                                             placeholder="Security Code" 
+                                             value="{!v.caseMR.CC_Card_CVC__c}" />
+                            <!-- Checkbox for Billing Address same as shipping Address -->
+                            <br/><br/><br/>
+                            <ui:inputCheckbox aura:id="myCheckbox77" 
+                                              class="slds-size_1-of-1 slds-p-horizontal_xx-small" 
+                                              change="{!c.onCheckBoxCheck}" 
+                                              label="Is Billing Address Same as Shipping Address"/>
+                            <br/><br/>
+        
+                            
+                            <!-- Billing Address -->
+                            <lightning:input aura:id="myBillAddr" 
+                                             class="slds-size_1-of-1 slds-p-horizontal_xx-small" 
+                                             label="Billing Address" required="true" 
+                                             value="{!v.caseMR.ChargentCases__Billing_Address__c}"/>
+                            <!-- Billing City -->
+                            <lightning:input aura:id="myBillCity" 
+                                             class="slds-size_1-of-2 slds-p-horizontal_xx-small" 
+                                             label="Billing City" required="true" 
+                                             value="{!v.caseMR.ChargentCases__Billing_City__c}"/>
+                            <!-- Billing State -->
+                            <lightning:combobox aura:id="myBillState" 
+                                                class="slds-size_1-of-2 slds-p-horizontal_xx-small" 
+                                                label="Billing State" required="true" 
+                                                placeholder="Select State" 
+                                                options="{! v.stateOptions }" 
+                                                value="{!v.caseMR.ChargentCases__Billing_State__c}"/>
+                            <!-- Billing Postal Code -->
+                            <lightning:input aura:id="myPostCode" 
+                                             class="slds-size_1-of-2 slds-p-horizontal_xx-small" 
+                                             label="Billing Postal Code" required="true" 
+                                             value="{!v.caseMR.ChargentCases__Billing_Postcode__c}"/>
+                            <!-- Billing Country -->
+                            <lightning:input aura:id="myCountry" 
+                                             class="slds-size_1-of-2 slds-p-horizontal_xx-small" 
+                                             label="Billing Country" required="true" 
+                                             value="{!v.caseMR.ChargentCases__Billing_Country__c}"/>
+                        </aura:if>
+
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button onclick="{!c.hideModal}" disabled="{!v.isLoading}" 
+                                      label="Cancel"/>
+                    <aura:if isTrue="{!v.stage == 'address'}">
+                        <lightning:button onclick="{!c.nextStage}" disabled="{!v.isLoading}" 
+                                          label="Next"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.stage == 'card'}">
+                    <lightning:button onclick="{!c.saveAndCharge}" disabled="{!v.isLoading}" 
+                                      label="Save and Charge"/>
+                    </aura:if>
+                </footer>
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"/>
+        
+    </aura:if>
+
+</aura:component>

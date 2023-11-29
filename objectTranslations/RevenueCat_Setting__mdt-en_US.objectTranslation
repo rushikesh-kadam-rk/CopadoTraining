@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>RevenueCat Setting</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>RevenueCat Settings</value>
+    </caseValues>
+    <fields>
+        <label><!-- Header --></label>
+        <name>Header__c</name>
+    </fields>
+    <fields>
+        <label><!-- Token --></label>
+        <name>Token__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Hashing --></label>
+        <name>Use_Hashing__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

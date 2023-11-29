@@ -1,0 +1,8 @@
+/**This class will highlight selected campaign*/
+.selected-campaign{
+	box-shadow: rgba(169, 169, 169,0.6) 0px 5px 15px;
+	border: 1px solid #a9a9a9;
+}
+.campaign-name{
+	font-weight: bold;
+}

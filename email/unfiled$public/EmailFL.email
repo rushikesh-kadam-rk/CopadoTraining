@@ -1,0 +1,26 @@
+<messaging:emailTemplate recipientType="Contact"
+    relatedToType="Contact"
+    subject="Test Contact Email for Translation"
+    language="{!If(relatedTo.00N2w00000bnHXr == 'USA','en_US','fr')}">
+
+    <messaging:htmlEmailBody >
+        <html>
+            <body>
+                <p>Below is a list of cases related to {!relatedTo.name}.</p>
+                <p/>
+                <p>{!$Label.Email_Template_Label}</p>
+                <apex:outputPanel rendered="{!If(relatedTo.00N2w00000bnHXr == 'USA',true,false)}">
+                    <p>English Content: {!relatedTo.name}</p>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!If(relatedTo.00N2w00000bnHXr == 'France',true,false)}">
+                    <p>French Content : {!relatedTo.name}</p>
+                </apex:outputPanel>
+                <center>
+                    <apex:outputLink value="https://salesforce.com">
+                        For more detailed information login to Salesforce.com
+                    </apex:outputLink>
+                </center>
+            </body>
+        </html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

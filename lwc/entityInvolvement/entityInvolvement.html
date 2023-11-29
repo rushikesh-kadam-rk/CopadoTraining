@@ -1,0 +1,131 @@
+<template>
+    <div class="slds-var-p-around_medium">
+        <lightning-button 
+            variant="brand" 
+            label="Add Entity Involvement" 
+            title="Primary action" 
+            onclick={openModal} 
+            class="slds-m-left_x-small">
+        </lightning-button>
+    </div>
+    
+    <div class="slds-var-p-around_medium">
+        <lightning-datatable
+            key-field="Id"
+            data={eiList}
+            columns={eicoulumns}
+            hide-checkbox-column="true">
+        </lightning-datatable> 
+    </div>
+    
+    <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Add Entity Involvement</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-tabset>
+                        <lightning-tab label="Search Contacts">
+                                <div class="slds-grid slds-gutters">
+                                    <div class="slds-col slds-size_2-of-3" onkeyup={searchContacts}>
+                                        <lightning-input
+                                            name="enter-search"
+                                            placeholder="Search Contact Details"
+                                            type="search"
+                                            onchange={searchContacts}
+                                        ></lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-3">
+                                        <lightning-button 
+                                            variant="brand" 
+                                            label="Search" 
+                                            title="Primary action" 
+                                            onclick={handleSearch}
+                                            disabled={isNotSearchable}>
+                                        </lightning-button>
+                                    </div>
+                                </div>  
+                                <div class="slds-var-m-around_medium">
+                                    <template if:false={searchBtnClicked}>
+                                        <div class="slds-m-around_medium slds-text-align_center">
+                                            Relationship search results will display here.
+                                        </div>
+                                    </template>
+                                    <template if:true={searchBtnClicked}>
+                                        <template if:true={contactList}>
+                                            <lightning-datatable
+                                                class="contactLDT"
+                                                key-field="Id"
+                                                data={contactList}
+                                                columns={columns}
+                                                draft-values={draftValues}
+                                                onsave={handleSave}
+                                                onrowselection={handleRowSelection}
+                                                selected-rows={selectedRows}>
+                                            </lightning-datatable>  
+                                        </template>
+                                        <template if:false={contactList.length}>
+                                            <div class="slds-m-around_medium slds-text-align_center">
+                                                No search results found. Please refine your search with specific details.
+                                            </div>
+                                        </template>
+                                    </template>
+                                </div>
+                        </lightning-tab>
+                    </lightning-tabset>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="base" label="Cancel" title="Cancel" onclick={closeModal} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button label="Add New Contact" title="Add New Contact" onclick={addNewAccount} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Add Selected Contact" title="Add Selected Relationship" onclick={addSelectedAccount} class="slds-m-left_x-small" disabled={addAccount}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={showCreateContact}>
+        <c-add-contact showcreate-contact={showCreateContact} loan-record-id={recordId} onclose={closeModal}></c-add-contact>
+    </template>
+    <!-- <template if:true={isSecondModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2">
+            <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeSecondModal}>
+                    <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            <h2 id="modal-heading-02" class="slds-modal__title slds-hyphenate">Add New Contact</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                <div class="slds-box slds-theme_shade">
+                    <p class="slds-truncate slds-text-heading_small"><strong>Relationship</strong></p>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning-button label="Back" title="Back" onclick={handleBack} class="slds-m-left_x-small slds-float_left"></lightning-button>
+                <lightning-button variant="base" label="Cancel" title="Cancel" onclick={closeSecondModal} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button variant="brand" label="Save Relationship" title="Save Relationship" onclick={addSelectedAccount} class="slds-m-left_x-small" disabled="true"></lightning-button>
+            </footer>
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+    </template> -->
+    <template if:true={isThirdModalOpen}>
+        <c-add-e-i-screen modal-open={isThirdModalOpen} contact-list={selectedContacts} loan-record-id={recordId} onclose={closeModal}></c-add-e-i-screen>
+    </template>
+</template>

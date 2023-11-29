@@ -1,0 +1,152 @@
+<template>
+  <!--CONFIRMED REBATE ITEMS START-->
+  <div>
+    <!--LIST OF CONFIRMED REBATE ITEMS START-->
+    <table
+      class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-bottom_medium"
+      aria-label="Table of Confirmed Rebate Items"
+    >
+      <!--HEADER ROW OF TABLE SHOWING CONFIRMED REBATE ITEMS START-->
+      <thead>
+        <tr class="slds-line-height_reset">
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_SKU}>
+              {labels.REBATE_SKU}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_DESCRIPTION}>
+              {labels.REBATE_DESCRIPTION}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_MAX_QUANTITY}>
+              {labels.REBATE_MAX_QUANTITY}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_AMOUNT}>
+              {labels.REBATE_AMOUNT}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_QUANTITY}>
+              {labels.REBATE_QUANTITY}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_ESTIMATED_CREDIT}>
+              {labels.REBATE_ESTIMATED_CREDIT}
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <!--HEADER ROW OF TABLE SHOWING CONFIRMED REBATE ITEMS END-->
+      <tbody>
+        <template
+          for:each={confirmedRebateItems}
+          for:item="confirmedRebateItem"
+        >
+          <tr class="slds-hint-parent" key={confirmedRebateItem}>
+            <!--REBATE ITEM SKU-->
+            <td data-label="SKU" scope="row">
+              <div class="slds-truncate" title="SKU">
+                <lightning-formatted-text
+                  value={confirmedRebateItem.rebateItemSKU}
+                >
+                </lightning-formatted-text>
+              </div>
+            </td>
+            <!--REBATE ITEM DESCRIPTION-->
+            <td data-label="Description" class="slds-cell-wrap">
+              <div
+                class="slds-line-clamp"
+                title={confirmedRebateItem.rebateItemDescription}
+              >
+                <lightning-formatted-text
+                  value={confirmedRebateItem.rebateItemDescription}
+                >
+                </lightning-formatted-text>
+              </div>
+            </td>
+            <!--REBATE ITEM MAXIMUM QUANTITY-->
+            <td data-label="Maximum Rebate Quantity">
+              <div
+                class="slds-truncate"
+                title={confirmedRebateItem.maximumRebateQuantity}
+              >
+                <lightning-formatted-number
+                  value={confirmedRebateItem.maximumRebateQuantity}
+                >
+                </lightning-formatted-number>
+              </div>
+            </td>
+            <!--REBATE ITEM AMOUNT-->
+            <td data-label="Rebate Amount">
+              <div
+                class="slds-truncate"
+                title="confirmedRebateItem.rebateAmount}"
+              >
+                <lightning-formatted-number
+                  value={confirmedRebateItem.rebateAmount}
+                  format-style="currency"
+                  currency-code={confirmedRebateItem.campaignCurrency}
+                >
+                </lightning-formatted-number>
+              </div>
+            </td>
+            <!--REBATE ITEM QUANTITY-->
+            <td data-label="Rebate Quantity">
+              <div
+                class="slds-truncate"
+                title={confirmedRebateItem.rebateQuantity}
+              >
+                <lightning-formatted-number
+                  value={confirmedRebateItem.rebateQuantity}
+                >
+                </lightning-formatted-number>
+              </div>
+            </td>
+            <!--REBATE ITEM ESTIMATED REBATE CREDIT-->
+            <td data-label="Estimated Rebate Credit">
+              <div
+                class="slds-truncate"
+                title={confirmedRebateItem.estimatedRebateCredit}
+              >
+                <lightning-formatted-number
+                  value={confirmedRebateItem.estimatedRebateCredit}
+                  format-style="currency"
+                  currency-code={confirmedRebateItem.campaignCurrency}
+                >
+                </lightning-formatted-number>
+              </div>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    <!--LIST OF CONFIRMED REBATE ITEMS END-->
+    <!--TOTAL ESTIMATED REBATE CREDIT SECTION START-->
+    <div>
+      <div class="slds-grid slds-grid_vertical-align-end">
+        <div class="slds-col slds-size_10-of-12">
+          <div
+            class="slds-text-align_right slds-text-heading_medium slds-p-right_small"
+          >
+            {labels.REBATE_TOTAL_EST_CREDIT}
+          </div>
+        </div>
+        <div class="slds-col slds-size_2-of-12 slds-text-heading_medium">
+          <lightning-formatted-number
+            value={totalEstimatedRebateCredit}
+            format-style="currency"
+            currency-code={campaignCurrency}
+          >
+          </lightning-formatted-number>
+        </div>
+      </div>
+    </div>
+    <!--TOTAL ESTIMATED REBATE CREDIT SECTION END-->
+  </div>
+  <!--CONFIRMED REBATE ITEMS END-->
+</template>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label><!-- CAR HUB --></label>
+        <name>CAR_HUB</name>
+    </customApplications>
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label><!-- ChartJS Demo --></label>
+        <name>ChartJS_Demo</name>
+    </customApplications>
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label><!-- Conference Management --></label>
+        <name>Conference_Management</name>
+    </customApplications>
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label><!-- DreamInvest --></label>
+        <name>DreamInvest</name>
+    </customApplications>
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label><!-- Einstein Vision --></label>
+        <name>Einstein_Vision</name>
+    </customApplications>
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label><!-- Integration LWC --></label>
+        <name>Integration_LWC</name>
+    </customApplications>
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label><!-- Recruiting --></label>
+        <name>Recruiting</name>
+    </customApplications>
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label><!-- Tickets Inc. --></label>
+        <name>Tickets_Inc</name>
+    </customApplications>
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label><!-- Udemy Integration --></label>
+        <name>Udemy_Integration</name>
+    </customApplications>
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label><!-- Vaccine Drive --></label>
+        <name>Vaccine_Drive</name>
+    </customApplications>
+    <customLabels>
+        <label><!-- APIKey --></label>
+        <name>APIKey</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- AVAILABLE_REBATE_ITEMS --></label>
+        <name>AVAILABLE_REBATE_ITEMS</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- BACK_BUTTON --></label>
+        <name>BACK_BUTTON</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Button Name --></label>
+        <name>Button_Name</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CAMPAIGN_END_DATE --></label>
+        <name>CAMPAIGN_END_DATE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CAMPAIGN_NAME --></label>
+        <name>CAMPAIGN_NAME</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CAMPAIGN_START_DATE --></label>
+        <name>CAMPAIGN_START_DATE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CAMPAIGN_SUB_END_DATE --></label>
+        <name>CAMPAIGN_SUB_END_DATE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CAMPAIGN_SUB_START_DATE --></label>
+        <name>CAMPAIGN_SUB_START_DATE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CANCEL_BUTTON --></label>
+        <name>CANCEL_BUTTON</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CLOSE_BUTTON --></label>
+        <name>CLOSE_BUTTON</name>
+    </customLabels>
+    <customLabels>
+        <label>C&apos;est la valeur anglaise</label>
+        <name>Email_Template_Label</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- MAX_QUANTITY_ERRROR_MESSAGE --></label>
+        <name>MAX_QUANTITY_ERRROR_MESSAGE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- NEXT_BUTTON --></label>
+        <name>NEXT_BUTTON</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- NO_REBATE_ITEMS_MESSAGE --></label>
+        <name>NO_REBATE_ITEMS_MESSAGE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- NO_RELATED_RI_MESSAGE --></label>
+        <name>NO_RELATED_RI_MESSAGE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- QUANTITY_ERRROR_MESSAGE --></label>
+        <name>QUANTITY_ERRROR_MESSAGE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATES_LIST --></label>
+        <name>REBATES_LIST</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_ACTION --></label>
+        <name>REBATE_ACTION</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_ADD_ACTION --></label>
+        <name>REBATE_ADD_ACTION</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_AMOUNT --></label>
+        <name>REBATE_AMOUNT</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_DESCRIPTION --></label>
+        <name>REBATE_DESCRIPTION</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_ESTIMATED_CREDIT --></label>
+        <name>REBATE_ESTIMATED_CREDIT</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_ITEMS_LIST --></label>
+        <name>REBATE_ITEMS_LIST</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_MAX_QUANTITY --></label>
+        <name>REBATE_MAX_QUANTITY</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_NAME --></label>
+        <name>REBATE_NAME</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_QUANTITY --></label>
+        <name>REBATE_QUANTITY</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_REMOVE_ACTION --></label>
+        <name>REBATE_REMOVE_ACTION</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_SKU --></label>
+        <name>REBATE_SKU</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- REBATE_TOTAL_EST_CREDIT --></label>
+        <name>REBATE_TOTAL_EST_CREDIT</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SELECTED_REBATE_ITEMS --></label>
+        <name>SELECTED_REBATE_ITEMS</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SELECT_CAMPAIGN --></label>
+        <name>SELECT_CAMPAIGN</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SELECT_REBATE --></label>
+        <name>SELECT_REBATE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SUBMISSION_COMPLETED --></label>
+        <name>SUBMISSION_COMPLETED</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SUBMISSION_FAILED --></label>
+        <name>SUBMISSION_FAILED</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SUBMISSION_INPROGRESS --></label>
+        <name>SUBMISSION_INPROGRESS</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SUBMIT_BUTTON --></label>
+        <name>SUBMIT_BUTTON</name>
+    </customLabels>
+    <customPageWebLinks>
+        <label><!-- BuildReportData --></label>
+        <name>BuildReportData</name>
+    </customPageWebLinks>
+    <customTabs>
+        <label><!-- Car Explorer --></label>
+        <name>Car_Explorer</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Currency Convertor --></label>
+        <name>Currency_Convertor</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Einstein Intent --></label>
+        <name>Einstein_Intent</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Einstein Vision --></label>
+        <name>Einstein_Vision</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Fund Explorer --></label>
+        <name>Fund_Explorer</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Interactive --></label>
+        <name>Interactive1</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- PositionDetailPage --></label>
+        <name>PositionDetailPage</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Profile Compare --></label>
+        <name>Profile_Compare</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Real Time --></label>
+        <name>Real_Time</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- SubTab --></label>
+        <name>SubTab</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Vaccine --></label>
+        <name>Vaccine</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Vaccine Slots --></label>
+        <name>Vaccine_Slots</name>
+    </customTabs>
+    <quickActions>
+        <label><!-- Guest Community Case --></label>
+        <name>GuestCommunityCase</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- LogACall --></label>
+        <name>LogACall</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewAccount --></label>
+        <name>NewAccount</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewCase --></label>
+        <name>NewCase</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Community Case --></label>
+        <name>NewCommunityCase</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewContact --></label>
+        <name>NewContact</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewEvent --></label>
+        <name>NewEvent</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewGroup --></label>
+        <name>NewGroup</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewLead --></label>
+        <name>NewLead</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewNote --></label>
+        <name>NewNote</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewOpportunity --></label>
+        <name>NewOpportunity</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewTask --></label>
+        <name>NewTask</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Credit Memo --></label>
+        <name>New_Credit_Memo</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- SendEmail --></label>
+        <name>SendEmail</name>
+    </quickActions>
+</Translations>

@@ -1,0 +1,15 @@
+<apex:page controller="NewBookingController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="YES" action="{!goToBookingList}"/>
+                <apex:commandButton value="Back" action="{!goBack}"/>
+            </apex:pageBlockButtons>
+        <apex:pageBlockSection columns="1">
+            <h6>You are missing on a Dream Concert!!! Are you sure, you want to cancel booking?</h6><br></br>
+            
+        </apex:pageBlockSection>
+        
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

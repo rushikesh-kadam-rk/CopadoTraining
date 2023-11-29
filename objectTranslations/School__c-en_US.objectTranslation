@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>School</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Schools</value>
+    </caseValues>
+    <fields>
+        <label><!-- Fees --></label>
+        <name>Fees__c</name>
+    </fields>
+    <fields>
+        <label><!-- School Address --></label>
+        <name>School_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- School Email --></label>
+        <name>School_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- School Phone --></label>
+        <name>School_Phone__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,3 @@
+<aura:tokens>
+	<aura:token name="caseTextMargin" value="20px"></aura:token>
+</aura:tokens>

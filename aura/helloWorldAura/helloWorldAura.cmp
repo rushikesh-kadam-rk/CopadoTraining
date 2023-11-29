@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="EB_CaseReplacementProductUtility">
+    <aura:attribute name="showModal" type="boolean" default="false"/>\
+    <aura:handler name="cmpEvent" event="c:CloseModalEvent" action="{!c.closeModal}" />
+    <lightning:button label="Neutral" title="Neutral action" onclick="{! c.onButtonClick }"/>
+    <aura:html tag="style">.toastMessage.forceActionsText{width: 25rem !important; display: block !important;}</aura:html>
+    <aura:if isTrue="{!v.showModal}" >
+        <c:CreditCardModal aura:id="cComp"></c:CreditCardModal>
+    </aura:if>
+</aura:component>

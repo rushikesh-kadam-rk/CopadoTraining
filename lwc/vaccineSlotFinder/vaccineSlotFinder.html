@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="Vaccine Slot Finder">
+        <lightning-input
+            type="search"
+            placeholder="Pincode"
+            slot="actions"
+            onkeyup={pincodeChangeHandler}>
+        </lightning-input>
+        <lightning-datatable
+            data={centers}
+            columns={dates}
+            key-field="id"
+            show-row-number-column
+            hide-checkbox-column
+            if:true={hideMessage}>
+        </lightning-datatable>
+
+        <div if:false={hideMessage} class="slds-text-align_center slds-text-heading_medium">
+            No Slots!! Please select a different pincode
+        </div>
+    </lightning-card>
+
+    <lightning-input
+            type="search"
+            placeholder="Pincode"
+            slot="actions"
+            onkeyup={handleAccoountId}>
+        </lightning-input>
+
+    <lightning-button label="Open Tab" variant="brand" onclick={onOpenAccountClick}></lightning-button>
+</template>

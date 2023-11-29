@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Queue 1</name>
+    <queueMembers>
+        <users>
+            <user>integration@00d2w000001na7neac.com</user>
+            <user>rktest@yopmail.com</user>
+            <user>rs@yopmail.com</user>
+            <user>rushikeshkadamsfdc+devorgrk@gmail.com</user>
+            <user>insightssecurity@00d2w000001na7neac.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>ChannelProgram</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>CommSubscription</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>CommSubscriptionChannelType</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>CommSubscriptionConsent</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Concert__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>ConsumptionSchedule</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>ContactPointConsent</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>ContactPointTypeConsent</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Lead</sobjectType>
+    </queueSobject>
+</Queue>

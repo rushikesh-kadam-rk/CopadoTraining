@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Event</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Events</value>
+    </caseValues>
+    <fields>
+        <label><!-- Available Tickets --></label>
+        <name>Avail_Tickets__c</name>
+    </fields>
+    <fields>
+        <label><!-- #Booked Tickets --></label>
+        <name>Booked_Tickets__c</name>
+    </fields>
+    <fields>
+        <label><!-- Concert --></label>
+        <name>Concert__c</name>
+        <relationshipLabel><!-- Events --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Event Timing --></label>
+        <name>Event_Timing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ticket Price --></label>
+        <name>Ticket_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Tickets --></label>
+        <name>Total_Tickets__c</name>
+    </fields>
+    <fields>
+        <label><!-- Venue --></label>
+        <name>Venue__c</name>
+        <relationshipLabel><!-- Events --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Waiting List --></label>
+        <name>Waiting_List__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Available Tickets are Zero --></errorMessage>
+        <name>Available_Tickets_Rule</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Service Quote</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Service Quotes</value>
+    </caseValues>
+    <fields>
+        <label><!-- GP% --></label>
+        <name>GP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Service Quotes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Selling Price --></label>
+        <name>Selling_Price__c</name>
+    </fields>
+    <fields>
+        <label><!-- Service Cost --></label>
+        <name>Service_Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Service GP --></label>
+        <name>Service_GP__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

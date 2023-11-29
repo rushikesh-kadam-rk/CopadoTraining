@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="HelloWorld" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <p>Hello, {greeting}!</p>
+            <lightning-input label="Name" value={greeting} onchange={changeHandler}></lightning-input>
+        </div>
+        <div>
+            <lightning-button onclick={onButtonCLicked} label="Click"></lightning-button>
+        </div>
+        <div>
+            <lightning-button onclick={showToastMessage} label="Toast"></lightning-button>
+        </div>
+        <template if:true={isThirdModalOpen}>
+            <c-ye-no-modal contact-record-id={recordId} is-modal-open={isThirdModalOpen}></c-ye-no-modal>
+        </template>
+    <div>
+        <template for:each={contacts.data} for:item="contact">
+            <lightning-input 
+            key={contact.Id} 
+            label={contact.Name} 
+            type="checkbox" 
+            data-value={contact.Id} 
+            onchange={handleChangeEvent}>
+        </lightning-input>
+        </template>
+    </div>
+    </lightning-card>
+</template>

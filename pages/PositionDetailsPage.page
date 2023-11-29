@@ -1,0 +1,13 @@
+<apex:page standardController="Position__c" >
+  <apex:form >
+      <apex:pageBlock title="Position Details">
+      <apex:pageBlockSection >
+          <apex:outputField value="{!Position__c.Name}"/><br/>
+           <apex:outputField value="{!Position__c.Job_Description__c}"/><br/>
+           <apex:outputField value="{!Position__c.Status__c}"/> 
+              
+      </apex:pageBlockSection>            
+      
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,18 @@
+.THIS {
+    background-color:grey;
+}
+.THIS .divClass{
+    background-color:token(divClassBackground);
+}
+
+.THIS .red{
+    font-weight:token(divFontWeight);
+    font-family:token(divFont);
+}
+.THIS .yellow{
+    margin:token(divMargin);
+}
+.THIS .blue{
+    color:token(divTextColor);
+    margin:token(caseTextMargin);
+}

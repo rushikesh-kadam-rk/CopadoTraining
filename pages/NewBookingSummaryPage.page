@@ -1,0 +1,136 @@
+<apex:page controller="BookingSummaryController" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <style>
+                .heading {
+                    text-align: center;
+                    color: #34c6eb;
+                 }
+                 .bookingSummary{                   
+                     padding: 20px 0px;
+                     height: 40%;
+                 }
+                 .bookingId{
+                         float: left;
+                         display: block;
+                         width: 70%;
+                 }
+                 .date{
+                     float: right;
+                     display: block;
+                     width: 30%;
+                 }
+                 .customerDetials{
+                     margin: 20px 0px;
+                 }
+                 .concertDetials{
+                     margin: 20px 0px;
+                     float: left;
+                     width: 100%;
+                 }
+                 .orderSummary{
+                     display: block;
+                     margin: 20px 0px;
+                     float: left;
+                     width: 100%;
+                 }
+                 .dottedLine{
+                     border-top: 0.5px dashed;
+                     margin: 20px 0px;
+                     float: left;
+                     width: 100%;
+                 }
+                 .costDetails{
+                     padding: 0px 0px 20px 80px;
+                 }
+                 span {
+                     font-weight: bold;
+                 }
+            </style>
+        </head>
+        <body>
+            <h1 class="heading">Ticket Summary</h1>
+            <hr />
+            <div class="bookingSummary">
+                <div class="bookingId">
+                    Booking ID: <span><apex:outputText label=" " value="{!bookSummary.Name}"/></span>
+                    <div class="customerDetials">
+                        <div><apex:outputText value="{!custSummary.First_Name__c}"/><span> </span> <apex:outputText value="{!custSummary.Last_Name__c}"/></div>
+                        <div><apex:outputText value="{!custSummary.Contact__c}"/></div>
+                        <div><apex:outputText value="{!custSummary.Email__c}"/></div>
+                    </div>
+                </div>
+                <div class="date">
+                    <span><apex:outputText value="{!eventSummary.Event_Timing__c}"/></span>
+                    <div class="customerDetials">
+                        <div><apex:outputText value="{!venueSummary.Venue_Name__c}"/></div>
+                        <div><apex:outputText value="{!venueSummary.Venue_Address__c}"/></div> 
+                        <!--<div><apex:outputText value="{!venueSummary.Venue_Name__c}"/></div>-->           
+                     </div>
+                </div>
+            </div>
+            <div class="concertDetials">
+                <span><apex:outputText value="{!concertSummary.Concert_Type__c}"/></span>
+            </div>
+            <div class="orderSummary">
+                <hr />
+                <div><span style="font-size: 20px">Order Summary</span></div>
+                <div style="margin-top: 10px; float: left;width: 100%;"><span>Status</span></div>
+                <div style="margin-top: 10px; float: left;width: 100%;"></div>
+                <div class="costDetails">
+                    <div class="bookingId">Number of Tickets Confirmed:</div>
+                    <div class="date">
+                        <apex:outputText value="{!bookSummary.Confirmed_Tickets__c}"/>
+                    </div>
+                    <div class="bookingId">Tickets in Waiting:</div>
+                    <div class="date">
+                        <apex:outputText value="{!bookSummary.Waiting_Tickets__c}"/>
+                    </div>
+                </div>
+                <hr class="dottedLine"/>
+                <div style="margin-top: 10px; float: left;width: 100%;"><span>Pricing</span></div>
+                <div class="costDetails">
+                   <!--<div class="bookingId">Number of Regular Tickets:</div>
+                   <div class="date">
+                       <apex:outputText value="{!bookSummary.Number_of_Regular_Tickets__c}"/>
+                   </div>
+                   <div class="bookingId">Number of Premium Tickets:</div>
+                   <div class="date">
+                       <apex:outputText value="{!bookSummary.Number_of_Premium_Tickets__c}"/>
+                   </div>
+                   <div style="margin-top: 10px; float: left;width: 100%;"></div>
+                   <div class="bookingId">Price of Regular Tickets:</div>
+                   <div class="date">
+                       <apex:outputText value="{!bookSummary.Number_of_Regular_Tickets__c}"/>
+                       X<span> </span>
+                       Rs<span> </span>
+                       <apex:outputText value="{!ticketPrice}"/>
+                       <apex:outputText value="{!regularTicketPrice}"/>
+                   </div>
+                   <div class="bookingId">Price of Premium Tickets:</div>
+                   <div class="date">
+                       <apex:outputText value="{!bookSummary.Number_of_Premium_Tickets__c}"/>
+                       X<span> </span>
+                       Rs<span> </span>
+                       <apex:outputText value="{!ticketPrice}"/>
+                       <apex:outputText value="{!premiumTicketPrice}"/>
+                   </div>-->
+                   <div style="margin-top: 10px; float: left;width: 100%;"></div>
+                   <div class="bookingId">Ticket Cost:</div>
+                   <div class="date">
+                       <apex:outputText value="{!bookSummary.Number_of_Tickets_Booked__c}"/>
+                       X<span> </span>
+                       Rs<span> </span>
+                       <apex:outputText value="{!eventSummary.Ticket_Price__c}"/>
+                   </div>
+                   <hr class="dottedLine"/>
+                   <div class="bookingId"><span>Total</span></div>
+                   <div class="date">
+                       <apex:outputText value="{!bookSummary.Total_Price__c}"/>
+                   </div>
+               </div>
+               <hr style="margin-top: 10px; float: left;width: 100%;"/>
+            </div>
+        </body>
+    </html>
+</apex:page>

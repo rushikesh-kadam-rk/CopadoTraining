@@ -1,0 +1,18 @@
+<apex:page standardController="Position__c" recordSetVar="positions">
+  <apex:form >
+      <apex:pageBlock title="Position Details">
+              <apex:selectList value="{!filterid}" size="1">
+                 <apex:selectOptions value="{!listviewoptions}"/>
+             </apex:selectList>
+          <apex:pageBlockSection >
+              <apex:pageBlockTable value="{!positions}" var="position">
+                  <apex:column value="{!position.Name}"/>
+                  <apex:column value="{!position.Job_Description__c}"/>
+
+              </apex:pageBlockTable>
+              
+          </apex:pageBlockSection>
+          
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,37 @@
+<template>
+	<lightning-layout multiple-rows>
+		<template for:each={cardData} for:item="singleCard">
+            <!--CAMPAIGN CARD START-->
+			<lightning-layout-item size="6" padding="around-small" key={singleCard.campaignId}>
+				<lightning-card>
+					<div class="slds-p-horizontal_small slds-box" data-campid={singleCard.campaignId}
+						onclick={handleSelectedCampaign}>
+                        <!--CAMPAIGN DETAILS START-->
+                        <!--CAMPAIGN NAME-->
+						<div class="slds-text-heading_small campaign-name slds-p-bottom_small">
+							{singleCard.campaignName}
+						</div>
+                        <!--CAMPAIGN START DATE-->
+						<div class="">
+							{labels.CAMPAIGN_START_DATE} : {singleCard.campaignStartDate}
+						</div>
+                        <!--CAMPAIGN END DATE-->
+						<div class="">
+							{labels.CAMPAIGN_END_DATE} : {singleCard.campaignEndDate}
+						</div>
+                        <!--CAMPAIGN SUBSCRIPTION START DATE-->
+						<div class="">
+							{labels.CAMPAIGN_SUB_START_DATE} : {singleCard.campaignSubmissionStartDate}
+						</div>
+                        <!--CAMPAIGN SUBSCRIPTION END DATE-->
+						<div class="">
+							{labels.CAMPAIGN_SUB_END_DATE} : {singleCard.campaignSubmissionEndDate}
+						</div>
+                        <!--CAMPAIGN DETAILS END-->
+					</div>
+				</lightning-card>
+			</lightning-layout-item>
+            <!--CAMPAIGN CARD END-->
+		</template>
+	</lightning-layout>
+</template>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>This Visual Force page generates the report in excel format.It does not includes the code for difference highlighter when profiles against different org are compared with each other.</description>
+    <label>VFP03_ReportExcel</label>
+</ApexPage>

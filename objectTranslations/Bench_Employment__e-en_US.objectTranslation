@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Bench Employment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Bench Employments</value>
+    </caseValues>
+    <fields>
+        <label><!-- Event Id --></label>
+        <name>EventId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Event Name --></label>
+        <name>EventName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Operation --></label>
+        <name>Operation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Id --></label>
+        <name>Record_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record JSON --></label>
+        <name>Record_JSON__c</name>
+    </fields>
+    <fields>
+        <label><!-- SystemModstamp --></label>
+        <name>SystemModstamp__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,12 @@
+/**Class to control the height of Body*/
+.modal-body{
+	max-height: 21rem;	
+}
+
+.bar-height{
+	height: 0.35rem !important;
+}
+
+.submission-screen-height{
+	height: 12rem;
+}

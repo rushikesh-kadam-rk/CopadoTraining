@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>rushikeshkadamsfdc@gmail.com</contactEmail>
+    <label>GITLAB JWT</label>
+    <oauthConfig>
+        <callbackUrl>http://localhost:1717/OauthRedirect</callbackUrl>
+        <certificate>MIIDdjCCAl4CCQCsBCElVLxjVjANBgkqhkiG9w0BAQsFADB9MQswCQYDVQQGEwJVUzELMAkGA1UECAwCR0ExCzAJBgNVBAcMAkFMMQswCQYDVQQKDAJSSzENMAsGA1UECwwERGVtbzELMAkGA1UEAwwCUksxKzApBgkqhkiG9w0BCQEWHHJ1c2hpa2VzaGthZGFtc2ZkY0BnbWFpbC5jb20wHhcNMjMxMDE2MTExNjU1WhcNMjQxMDE1MTExNjU1WjB9MQswCQYDVQQGEwJVUzELMAkGA1UECAwCR0ExCzAJBgNVBAcMAkFMMQswCQYDVQQKDAJSSzENMAsGA1UECwwERGVtbzELMAkGA1UEAwwCUksxKzApBgkqhkiG9w0BCQEWHHJ1c2hpa2VzaGthZGFtc2ZkY0BnbWFpbC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDONrcmL3H9k1qHayI2SqOC2f2GVIK16K3KmNzWCusAtnlQvWJ4Y6rqBFQLg0+w5G9RaXc2AzvWYAAmSPKhpc1JOsfM3GVqWHTAzSpUWUk165sRX06PiiNCrRENYBtJcksNNB69USf5OnSAJCoJRWSGZy7+eiL8mKYytoYCOV1CLK31QoZ8L29Cb1NrTxk2CwWjQYY6pL1hZIioPhrvM1FoJGilzjBKyLhqWT2nSan6Ex9ZBM6SaSZ/oYCxpp4jzAM464QjOBygS86bY4+TMtyXmrIW0h8D8uVcb6bDKA4e39w/uPN1Gd/cIFlMBgSKBaihZEeZqeO35GUiWwPac3GdAgMBAAEwDQYJKoZIhvcNAQELBQADggEBACNxhK/E4EcrBgC5MgdlilW8u1aQHduKAl6DJFFApfO/bKzR2KLeLRjbXU+QE0oft/hzWHywLoJloKq1d5+4FP9NwrI2MFPDVQe4K519Kg+AZJFci/4gC2656eXFVrihN3FItUEnyCnEk9eiJgVmpCbA4AYx6tzIjyTyZWKOVkcmEAFV4IJ3JjNalMZxn1isOuFZtkKziZoUwgwGI62JdyZWr3jXjEHy1q1suqmCL7kekv4zW+8Wl3+Msdc2lPWmZKwHfsVCcyu7g3KomCfgyuXzpKubigK0vCtL1vX7DSefa7kgo+RkCBT5GPvr4nupv8RlWAn55vrxkw8vv0qUc00=</certificate>
+        <consumerKey>3MVG9n_HvETGhr3DkSMIsnsoXP6czMuhKZMssYcj3tp._xKRKXsPeLA4YXt7VyHd.q43Ana73TCXZf_k7lo_h</consumerKey>
+        <isAdminApproved>true</isAdminApproved>
+        <isClientCredentialEnabled>false</isClientCredentialEnabled>
+        <isCodeCredentialEnabled>false</isCodeCredentialEnabled>
+        <isCodeCredentialPostOnly>false</isCodeCredentialPostOnly>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isNamedUserJwtEnabled>false</isNamedUserJwtEnabled>
+        <isPkceRequired>true</isPkceRequired>
+        <isSecretRequiredForRefreshToken>true</isSecretRequiredForRefreshToken>
+        <scopes>Basic</scopes>
+        <scopes>Api</scopes>
+        <scopes>Web</scopes>
+        <scopes>RefreshToken</scopes>
+        <scopes>OpenID</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+    <profileName>System Administrator</profileName>
+</ConnectedApp>

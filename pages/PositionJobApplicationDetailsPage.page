@@ -1,0 +1,24 @@
+<apex:page standardController="Position__c">
+     <apex:form >
+         <apex:pageBlock >
+             <apex:pageBlockSection title="Position Details">
+                 <apex:outputField value="{!Position__c.Name}"/> 
+                 <apex:outputField value="{!Position__c.Job_Description__c}"/>    
+             </apex:pageBlockSection>
+             
+             <apex:pageBlockSection title="Job Applications ">
+                 <apex:pageBlockTable value="{!Position__c.Job_Applications__r}" var="ja">
+                     <apex:column value="{!ja.Name}"/>
+                     <apex:column value="{!ja.Position__c}"/>
+                     <apex:column value="{!ja.Position__r.Name}"/>
+                 </apex:pageBlockTable>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection title="Job Posting">
+                 <apex:pageBlockTable value="{!Position__c.Job_Postings__r}" var="ja">
+                     <apex:column value="{!ja.Name}"/>
+                 </apex:pageBlockTable>
+             </apex:pageBlockSection>
+             
+         </apex:pageBlock>
+     </apex:form>
+</apex:page>

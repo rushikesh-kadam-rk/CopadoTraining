@@ -1,0 +1,14 @@
+<apex:page controller="PCJController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Previous" action="{!positionpage}"/>
+                 <apex:commandButton value="Next" action="{!positioncandidatepage}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection >
+                <apex:inputField value="{!candidate.First_Name__c}"/>
+                <apex:inputField value="{!candidate.Last_Name__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

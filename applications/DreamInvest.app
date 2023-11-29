@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#84BF41</headerColor>
+        <logo>invest_logo4</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>DreamInvest</label>
+    <navType>Standard</navType>
+    <tabs>standard-home</tabs>
+    <tabs>Fund_Explorer</tabs>
+    <tabs>Fund__c</tabs>
+    <tabs>Sector__c</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>Product_Quote__c</tabs>
+    <tabs>Service_Quote__c</tabs>
+    <tabs>Logs__c</tabs>
+    <tabs>CaseReplacementProduct__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>DreamCapital_UtilityBar</utilityBar>
+</CustomApplication>

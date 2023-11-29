@@ -1,0 +1,15 @@
+.mycolor{
+	background-color:blue;
+}
+.divClass{
+	background-color:grey;
+}
+.red{
+	background-color:red;
+}
+.yellow{
+	background-color:yellow;
+}
+.blue{
+	background-color:blue;
+}

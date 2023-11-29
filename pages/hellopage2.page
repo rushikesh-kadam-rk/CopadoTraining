@@ -1,0 +1,24 @@
+<apex:page showHeader="true" sidebar="true" >
+    <apex:form >
+        <apex:pageBlock title="Position Details">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" />
+                
+            </apex:pageBlockButtons>
+        
+        
+        </apex:pageBlock>
+        
+        
+        
+        <apex:pageBlock title="Job Application Details">
+            <apex:pageBlockSection title="IT">
+                
+                
+            </apex:pageBlockSection>
+        
+        
+        </apex:pageBlock>
+    
+    </apex:form>
+</apex:page>

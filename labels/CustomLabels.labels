@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>APIKey</fullName>
+        <categories>VeriPhone</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>APIKey</shortDescription>
+        <value>87BA488EA92F4A08B39B524A956910A9</value>
+    </labels>
+    <labels>
+        <fullName>AVAILABLE_REBATE_ITEMS</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AVAILABLE_REBATE_ITEMS</shortDescription>
+        <value>Available Rebate Items</value>
+    </labels>
+    <labels>
+        <fullName>BACK_BUTTON</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BACK_BUTTON</shortDescription>
+        <value>Back</value>
+    </labels>
+    <labels>
+        <fullName>Button_Name</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Button Name</shortDescription>
+        <value>Click Here CL</value>
+    </labels>
+    <labels>
+        <fullName>CAMPAIGN_END_DATE</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CAMPAIGN_END_DATE</shortDescription>
+        <value>End Date</value>
+    </labels>
+    <labels>
+        <fullName>CAMPAIGN_NAME</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CAMPAIGN_NAME</shortDescription>
+        <value>Campaign Name</value>
+    </labels>
+    <labels>
+        <fullName>CAMPAIGN_START_DATE</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CAMPAIGN_START_DATE</shortDescription>
+        <value>Start Date</value>
+    </labels>
+    <labels>
+        <fullName>CAMPAIGN_SUB_END_DATE</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CAMPAIGN_SUB_END_DATE</shortDescription>
+        <value>Submission End Date</value>
+    </labels>
+    <labels>
+        <fullName>CAMPAIGN_SUB_START_DATE</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CAMPAIGN_SUB_START_DATE</shortDescription>
+        <value>Submission Start Date</value>
+    </labels>
+    <labels>
+        <fullName>CANCEL_BUTTON</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CANCEL_BUTTON</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>CLOSE_BUTTON</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CLOSE_BUTTON</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>Email_Template_Label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email_Template_Label</shortDescription>
+        <value>This is English Value</value>
+    </labels>
+    <labels>
+        <fullName>MAX_QUANTITY_ERRROR_MESSAGE</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MAX_QUANTITY_ERRROR_MESSAGE</shortDescription>
+        <value>Allowed Maximum Quantity:</value>
+    </labels>
+    <labels>
+        <fullName>NEXT_BUTTON</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NEXT_BUTTON</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>NO_REBATE_ITEMS_MESSAGE</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NO_REBATE_ITEMS_MESSAGE</shortDescription>
+        <value>No rebates are currently in the submission period for any of the Buyer Groups on this
+            account.</value>
+    </labels>
+    <labels>
+        <fullName>NO_RELATED_RI_MESSAGE</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NO_RELATED_RI_MESSAGE</shortDescription>
+        <value>There are no rebate items on this rebate. Contact Sales Ops if this is in error.</value>
+    </labels>
+    <labels>
+        <fullName>QUANTITY_ERRROR_MESSAGE</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUANTITY_ERRROR_MESSAGE</shortDescription>
+        <value>Enter Valid Quantity</value>
+    </labels>
+    <labels>
+        <fullName>REBATES_LIST</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATES_LIST</shortDescription>
+        <value>Rebates List</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_ACTION</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_ACTION</shortDescription>
+        <value>Action</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_ADD_ACTION</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_ADD_ACTION</shortDescription>
+        <value>Add</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_AMOUNT</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_AMOUNT</shortDescription>
+        <value>Rebate Amount</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_DESCRIPTION</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_DESCRIPTION</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_ESTIMATED_CREDIT</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_ESTIMATED_CREDIT</shortDescription>
+        <value>Estimated Rebate Credit</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_ITEMS_LIST</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_ITEMS_LIST</shortDescription>
+        <value>Rebate Items List</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_MAX_QUANTITY</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_MAX_QUANTITY</shortDescription>
+        <value>Maximum Rebate Quantity</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_NAME</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_NAME</shortDescription>
+        <value>Item No.</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_QUANTITY</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_QUANTITY</shortDescription>
+        <value>Rebate Quantity</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_REMOVE_ACTION</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_REMOVE_ACTION</shortDescription>
+        <value>Remove</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_SKU</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_SKU</shortDescription>
+        <value>SKU Name</value>
+    </labels>
+    <labels>
+        <fullName>REBATE_TOTAL_EST_CREDIT</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REBATE_TOTAL_EST_CREDIT</shortDescription>
+        <value>Total Estimated Rebate Credit</value>
+    </labels>
+    <labels>
+        <fullName>SELECTED_REBATE_ITEMS</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SELECTED_REBATE_ITEMS</shortDescription>
+        <value>Selected Rebate Items</value>
+    </labels>
+    <labels>
+        <fullName>SELECT_CAMPAIGN</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SELECT_CAMPAIGN</shortDescription>
+        <value>Select a Campaign</value>
+    </labels>
+    <labels>
+        <fullName>SELECT_REBATE</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SELECT_REBATE</shortDescription>
+        <value>Select a Rebate</value>
+    </labels>
+    <labels>
+        <fullName>SUBMISSION_COMPLETED</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SUBMISSION_COMPLETED</shortDescription>
+        <value>Submission Completed</value>
+    </labels>
+    <labels>
+        <fullName>SUBMISSION_FAILED</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SUBMISSION_FAILED</shortDescription>
+        <value>Submission Failed</value>
+    </labels>
+    <labels>
+        <fullName>SUBMISSION_INPROGRESS</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SUBMISSION_INPROGRESS</shortDescription>
+        <value>Submission in process do not close this screen</value>
+    </labels>
+    <labels>
+        <fullName>SUBMIT_BUTTON</fullName>
+        <categories>Rebate Submission</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SUBMIT_BUTTON</shortDescription>
+        <value>Submit</value>
+    </labels>
+</CustomLabels>

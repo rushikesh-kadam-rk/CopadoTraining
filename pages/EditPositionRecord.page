@@ -1,0 +1,21 @@
+<apex:page standardController="Position__c">
+  
+     <apex:form >
+          <apex:pageBlock title="Edit Position Record" mode="edit">
+              
+            <apex:pageBlockButtons >
+                 <apex:commandButton action="{!edit}" value="Edit"/>
+      
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Position Record" columns="2">
+           
+                 <apex:inputField value="{!Position__c.name}"/>
+                 <apex:inputField value="{!Position__c.Job_Description__c}"/>
+                 <apex:inputField value="{!Position__c.Status__c}"/>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>   
+            
+     </apex:form>      
+    
+</apex:page>

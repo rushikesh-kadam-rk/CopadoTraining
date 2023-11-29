@@ -1,0 +1,290 @@
+<template>
+  <!--SELECTED REBATE ITEMS START-->
+  <div>
+    <!--SELECTED REBATE ITEMS TITLE-->
+    <div class="slds-text-title_bold slds-p-bottom_small">
+      {labels.SELECTED_REBATE_ITEMS}
+    </div>
+    <!--LIST OF SELECTED REBATE ITEMS START-->
+    <table
+      class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-bottom_medium"
+      aria-label="Table of Selected Rebate Items"
+    >
+      <!--HEADER ROW OF TABLE SHOWING SELECTED REBATE ITEMS START-->
+      <thead>
+        <tr class="slds-line-height_reset">
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_SKU}>
+              {labels.REBATE_SKU}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_DESCRIPTION}>
+              {labels.REBATE_DESCRIPTION}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_MAX_QUANTITY}>
+              {labels.REBATE_MAX_QUANTITY}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_AMOUNT}>
+              {labels.REBATE_AMOUNT}
+            </div>
+          </th>
+          <th scope="col" style="width: 2rem">
+            <div class="slds-truncate" title={labels.REBATE_QUANTITY}>
+              {labels.REBATE_QUANTITY}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_ACTION}>
+              {labels.REBATE_ACTION}
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <!--HEADER ROW OF TABLE SHOWING SELECTED REBATE ITEMS END-->
+      <tbody>
+        <template for:each={selectedRebateItems} for:item="selectedRebateItem">
+          <tr class="slds-hint-parent" key={selectedRebateItem}>
+            <!--REBATE ITEM SKU-->
+            <td data-label={selectedRebateItem.rebateItemSKU} scope="row">
+              <div
+                class="slds-truncate"
+                title={selectedRebateItem.rebateItemSKU}
+              >
+                <lightning-formatted-text
+                  value={selectedRebateItem.rebateItemSKU}
+                >
+                </lightning-formatted-text>
+              </div>
+            </td>
+            <!--REBATE ITEM DESCRIPTION-->
+            <td
+              data-label={selectedRebateItem.rebateItemDescription}
+              class="slds-cell-wrap"
+            >
+              <div
+                class="slds-line-clamp"
+                title={selectedRebateItem.rebateItemDescription}
+              >
+                <lightning-formatted-text
+                  value={selectedRebateItem.rebateItemDescription}
+                >
+                </lightning-formatted-text>
+              </div>
+            </td>
+            <!--REBATE ITEM MAXIMUM QUANTITY-->
+            <td data-label={selectedRebateItem.maximumRebateQuantity}>
+              <div
+                class="slds-truncate"
+                title={selectedRebateItem.maximumRebateQuantity}
+              >
+                <lightning-formatted-number
+                  value={selectedRebateItem.maximumRebateQuantity}
+                >
+                </lightning-formatted-number>
+              </div>
+            </td>
+            <!--REBATE ITEM AMOUNT-->
+            <td data-label={selectedRebateItem.rebateAmount}>
+              <div
+                class="slds-truncate"
+                title={selectedRebateItem.rebateAmount}
+              >
+                <lightning-formatted-number
+                  value={selectedRebateItem.rebateAmount}
+                  format-style="currency"
+                  currency-code={selectedRebateItem.campaignCurrency}
+                >
+                </lightning-formatted-number>
+              </div>
+            </td>
+            <!--REBATE ITEM QUANTITY-->
+            <td data-label={selectedRebateItem.rebateQuantity}>
+              <div
+                class="slds-line-clamp quantity-input"
+                title={selectedRebateItem.rebateQuantity}
+              >
+                <template lwc:if={selectedRebateItem.editSelectedQuantity}>
+                  <lightning-input
+                    name="rebateQuantity"
+                    class="selectedRIQuantity"
+                    type="number"
+                    value={selectedRebateItem.rebateQuantity}
+                    onblur={handleSelectedQuantityChange}
+                    variant="label-hidden"
+                    data-selrebateitemid={selectedRebateItem.rebateItemId}
+                    tabindex="0"
+                  >
+                  </lightning-input>
+                </template>
+                <template lwc:else>
+                  <span
+                    >{selectedRebateItem.rebateQuantity}
+                    <lightning-button-icon
+                      data-editrebateitemid={selectedRebateItem.rebateItemId}
+                      class="slds-float_right"
+                      icon-name="utility:edit"
+                      alternative-text="Update Quantity"
+                      title="Update Quantity"
+                      variant="bare"
+                      size="medium"
+                      onclick={handleEditSelectedQuantity}
+                    ></lightning-button-icon>
+                  </span>
+                </template>
+              </div>
+            </td>
+            <!--REBATE ITEM REMOVE ACTION-->
+            <td data-label="Remove">
+              <div class="slds-truncate">
+                <lightning-button
+                  label={labels.REBATE_REMOVE_ACTION}
+                  title="Remove Rebate Item"
+                  onclick={handleRemoveRebateItem}
+                  class="slds-m-left_x-small"
+                  variant="destructive"
+                  data-rebateid={selectedRebateItem.rebateItemId}
+                ></lightning-button>
+              </div>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    <!--LIST OF SELECTED REBATE ITEMS END-->
+  </div>
+  <!--SELECTED REBATE ITEMS END-->
+  <!--AVAILABLE REBATE ITEMS START-->
+  <div>
+    <div class="slds-text-title_bold slds-p-bottom_small">
+      {labels.AVAILABLE_REBATE_ITEMS}
+    </div>
+    <!--LIST OF AVAILABLE REBATE ITEMS START-->
+    <table
+      class="slds-table slds-table_cell-buffer slds-table_bordered"
+      aria-label="Table of Available Rebate Items"
+    >
+      <!--HEADER ROW OF TABLE SHOWING AVAILABLE REBATE ITEMS START-->
+      <thead>
+        <tr class="slds-line-height_reset">
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_SKU}>
+              {labels.REBATE_SKU}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_DESCRIPTION}>
+              {labels.REBATE_DESCRIPTION}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_MAX_QUANTITY}>
+              {labels.REBATE_MAX_QUANTITY}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_AMOUNT}>
+              {labels.REBATE_AMOUNT}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_QUANTITY}>
+              {labels.REBATE_QUANTITY}
+            </div>
+          </th>
+          <th scope="col">
+            <div class="slds-truncate" title={labels.REBATE_ACTION}>
+              {labels.REBATE_ACTION}
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <!--HEADER ROW OF TABLE SHOWING AVAILABLE REBATE ITEMS END-->
+      <tbody>
+        <template for:each={availableRebateItems} for:item="rebateItem">
+          <tr class="slds-hint-parent" key={rebateItem}>
+            <!--REBATE ITEM SKU-->
+            <td data-label={labels.REBATE_SKU} scope="row">
+              <div class="slds-truncate" title={rebateItem.rebateItemSKU}>
+                <lightning-formatted-text
+                  value={rebateItem.rebateItemSKU}
+                ></lightning-formatted-text>
+              </div>
+            </td>
+            <!--REBATE ITEM DESCRIPTION-->
+            <td data-label="Description" class="slds-cell-wrap">
+              <div
+                class="slds-line-clamp"
+                title={rebateItem.rebateItemDescription}
+              >
+                <lightning-formatted-text
+                  value={rebateItem.rebateItemDescription}
+                >
+                </lightning-formatted-text>
+              </div>
+            </td>
+            <!--REBATE ITEM MAXIMUM QUANTITY-->
+            <td data-label="Maximum Rebate Quantity">
+              <div
+                class="slds-truncate"
+                title={rebateItem.maximumRebateQuantity}
+              >
+                <lightning-formatted-number
+                  value={rebateItem.maximumRebateQuantity}
+                >
+                </lightning-formatted-number>
+              </div>
+            </td>
+            <!--REBATE ITEM AMOUNT-->
+            <td data-label="Rebate Amount">
+              <div class="slds-truncate" title={rebateItem.rebateAmount}>
+                <lightning-formatted-number
+                  value={rebateItem.rebateAmount}
+                  format-style="currency"
+                  currency-code={rebateItem.campaignCurrency}
+                >
+                </lightning-formatted-number>
+              </div>
+            </td>
+            <!--REBATE ITEM QUANTITY-->
+            <td data-label="Rebate Quantity">
+              <div
+                class="slds-line-clamp quantity-input"
+                title={rebateItem.rebateQuantity}
+              >
+                <lightning-input
+                  type="number"
+                  data-rebateitemid={rebateItem.rebateItemId}
+                  name="rebateQuantity"
+                  variant="label-hidden"
+                  value={rebateItem.rebateQuantity}
+                  onchange={handleQuantityChange}
+                ></lightning-input>
+              </div>
+            </td>
+            <!--REBATE ITEM ADD ACTION-->
+            <td data-label="Add">
+              <div class="slds-truncate">
+                <lightning-button
+                  label={labels.REBATE_ADD_ACTION}
+                  title="Add Rebate Item"
+                  onclick={handleAddRebateItem}
+                  class="slds-m-left_x-small"
+                  data-rebateid={rebateItem.rebateItemId}
+                  disabled={rebateItem.isQuantityDisabled}
+                >
+                </lightning-button>
+              </div>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    <!--LIST OF AVAILABLE REBATE ITEMS END-->
+  </div>
+  <!--AVAILABLE REBATE ITEMS END-->
+</template>

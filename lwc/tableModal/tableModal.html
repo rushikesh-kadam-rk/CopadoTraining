@@ -1,0 +1,135 @@
+<template>
+    <!-- <lightning-button variant="brand" label={label.buttonName} onclick={handleModel}>      
+    </lightning-button> -->
+    <div id="modal-container">
+        <lightning-button variant="brand" label={label.buttonName} onclick={handleModel}>      
+        </lightning-button>
+        <div class="spinner">
+            <template if:true={showLoading}>
+                <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                </lightning-spinner>
+            </template>
+        </div>
+        <template if:false={showLoading}>
+        <template if:true={isModelOpen}>
+            <section role="dialog" tabindex="-1" class="min_modal slds-modal slds-fade-in-open slds-modal_large" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header c-header_margin">
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item class="header_text modal_text_size">
+                                    3 existing similar contact(s) have been found. Select a contact below to use or update with the details you entered. OR cancel and confirm details with your customer.
+                                </lightning-layout-item>
+                            </lightning-layout>                  
+                        </div>
+                        <div class="c-container modal_text_size">
+                            <lightning-layout>
+                                <lightning-layout-item class="slds-var-p-around_medium">
+                                    <div>
+                                        <b>Your entry:</b>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-var-p-around_medium">
+                                    <div>
+                                        First Name: Steve
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-var-p-around_medium">
+                                    <div>
+                                        Last Name: Stevenson
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-var-p-around_medium">
+                                    <div>
+                                        Email: steve.stevenson@acme.com
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-var-p-around_medium">
+                                    <div>
+                                        Phone: (604) 123-4567
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-var-p-around_medium">
+                                    <div>
+                                        Job title: IT Manager
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </header>
+                    <div class="slds-modal__content" id="modal-content-id-1">
+                        <div class="slds-scrollable modal_content">
+                            <!-- class="slds-table slds-table_bordered" -->
+                            <table aria-describedby="conatact-list" class="slds-table_bordered modal_text_size">
+                                <!--Header of the table-->
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th class="slds-text-align_left table_heading" scope="col">
+                                            <div class="slds-truncate slds-assistive-text" id="column-group-header" title="Choose a row to select">Choose a row to select</div>
+                                        </th>
+                                        <th class="slds-text-align_left table_heading" scope="col">
+                                            <div class="slds-truncate table_data" title="First Name">First Name</div>
+                                        </th>
+                                        <th class="slds-text-align_left table_heading" scope="col">
+                                            <div class="slds-truncate table_data" title="Last Name">Last Name</div>
+                                        </th>
+                                        
+                                        <th class="slds-text-align_left table_heading" scope="col">
+                                            <div class="slds-truncate table_data" title="Email">Email</div>
+                                        </th>
+                                        <th class="slds-text-align_left table_heading" scope="col">
+                                            <div class="slds-truncate table_data" title="Phone">Phone
+                                            </div>
+                                        </th>
+                                        <th class="slds-text-align_left table_heading" scope="col">
+                                            <div class="slds-truncate table_data" title="Job Title">Job Title
+                                            </div>
+                                        </th>
+                                        <th class="slds-text-align_left table_heading" scope="col">
+                                            <div class="slds-truncate table_data" title="Verified Contact">Verified Contact</div>
+                                        </th>
+                                        <th class="slds-text-align_left table_heading" scope="col">
+                                            <div class="slds-truncate table_data" title="Last Modified Date">Last Modified Date</div>
+                                        </th>                                
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="slds-hint-parent">
+                                        <td scope="row" class="table_data">
+                                            <input                                                   
+                                                type="radio"
+                                                name="commonName"
+                                                value="contactId"
+                                                onclick={handleContactSelected}/>
+                                        </td>
+                                        <td scope="row" class="table_data">Steven</td>
+                                        <td scope="row" class="table_data">Stevenson</td>
+                                        <td scope="row" class="table_data">@steve.stecenson@acme.com</td>
+                                        <td scope="row" class="table_data">(604)123-4567</td>
+                                        <td scope="row" class="table_data">IT Analyst</td>
+                                        <td scope="row" class="table_data">
+                                            <template if:true={verifiedContact}>
+                                                show icon
+                                            </template>
+                                            <lightning-icon icon-name="utility:check" alternative-text="Verified" size="x-small" title="Verified Contact" variant="success" class="slds-var-m-right_x-small">
+                                            </lightning-icon>
+                                            <span>Test</span>
+                                        </td>
+                                        <td scope="row" class="table_data">Jun 21, 2021</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>                  
+                    </div>
+                    <footer class="slds-modal__footer table_row">
+                        <button class="slds-button slds-button_success" onclick={closeModal}>Use existing contact</button>
+                        <button class="slds-button slds-button_success" disabled={isContactSelected}>Update contact</button>
+                        <button class="slds-button slds-button_neutral" onclick={closeModal}>Cancel</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template> 
+        </template>
+    </div>
+</template>
